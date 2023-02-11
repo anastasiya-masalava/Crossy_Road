@@ -6,8 +6,6 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.textfield.TextInputLayout;
-
 public class ConfigPage extends AppCompatActivity {
 
     @Override
@@ -16,6 +14,8 @@ public class ConfigPage extends AppCompatActivity {
         setContentView(R.layout.activity_config);
     }
     public void startGame(View v){
+        String textInput = findViewById(R.id.entered_name).toString();
+
         startActivity(new Intent(ConfigPage.this, GamePage.class));
     }
 
