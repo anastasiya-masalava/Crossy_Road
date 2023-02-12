@@ -1,24 +1,31 @@
 package com.example.myapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 public class ConfigPage extends AppCompatActivity {
-
+//    private Button startGamebtn;
+    private TextView alertTextView;
     private boolean isLevelSelected = false;
     private boolean isSpriteSelected = false;
     private String difficultyLevel;
     private String spriteSelected;
-
     private String enteredName;
 
+    public void setAlertTextView(TextView textView){
+        this.alertTextView = textView;
+    }
     public void setIsLevelSelected(boolean isSelected){
         this.isLevelSelected = isSelected;
     }
@@ -57,12 +64,6 @@ public class ConfigPage extends AppCompatActivity {
 
     public String getEnteredName(){
         return enteredName;
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_config);
     }
 
     public void onLevelSelected(View view) {
@@ -110,27 +111,59 @@ public class ConfigPage extends AppCompatActivity {
                 break;
         }
     }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_config);
+    }
+    public void makeAlertBuilder(String alertTitle, String alertMessage){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ConfigPage.this);
+
+        builder.setCancelable(true);
+        builder.setTitle(alertTitle);
+        builder.setMessage(alertMessage);
+
+        builder.setNegativeButton("Got it!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        builder.show();
+    }
     public void startGame(View v){
         TextInputEditText textInputElement = findViewById(R.id.entered_name);
         String enteredName = textInputElement.getText().toString();
         setEnteredName(enteredName);
-        System.out.println("entered name:" + getEnteredName());
 
-        System.out.println("is level selected: " + getIsLevelSelected());
-        System.out.println("Level: " + getDifficultyLevel());
+//        Testing if-statement conditions:
+//        System.out.println("entered name:" + getEnteredName());
+//
+//        System.out.println("is level selected: " + getIsLevelSelected());
+//        System.out.println("Level: " + getDifficultyLevel());
+//
+//        System.out.println("is sprite selected: " + getIsSpriteSelected());
+//        System.out.println("Level: " + getSpriteSelected());
 
-        System.out.println("is sprite selected: " + getIsSpriteSelected());
-        System.out.println("Level: " + getSpriteSelected());
+        String alertTitle = "";
+        String alertMessage = "";
 
-        if(getEnteredName() == null){ //if the name is not written, it does not return null idk
-            //Write error message
+        if(getEnteredName().matches("")){
+            alertTitle = "name not entered!";
+            alertMessage = "please enter you name to proceed";
+            makeAlertBuilder(alertTitle, alertMessage);
         } else if(!getIsLevelSelected()) {
-            //Write error message
+            alertTitle = "difficulty level is not selected!";
+            alertMessage = "please select a difficulty level to proceed";
+            makeAlertBuilder(alertTitle, alertMessage);
         } else if(!getIsSpriteSelected()) {
-            //Write error message
+            alertTitle = "sprite is not selected!";
+            alertMessage = "please select a sprite to proceed";
+            makeAlertBuilder(alertTitle, alertMessage);
         } else {
             startActivity(new Intent(ConfigPage.this, GamePage.class));
         }
+
     }
 
 }

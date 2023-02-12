@@ -166,4 +166,14 @@
             android:onClick="onSpriteSelected" />
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/config_page_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below = "@+id/start_game"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
