@@ -119,7 +119,7 @@ public class ConfigPage extends AppCompatActivity {
     public void makeAlertBuilder(String alertTitle, String alertMessage){
         AlertDialog.Builder builder = new AlertDialog.Builder(ConfigPage.this);
 
-        builder.setCancelable(true);
+        builder.setCancelable(false);
         builder.setTitle(alertTitle);
         builder.setMessage(alertMessage);
 
@@ -135,15 +135,6 @@ public class ConfigPage extends AppCompatActivity {
         TextInputEditText textInputElement = findViewById(R.id.entered_name);
         String enteredName = textInputElement.getText().toString();
         setEnteredName(enteredName);
-
-//        Testing if-statement conditions:
-//        System.out.println("entered name:" + getEnteredName());
-//
-//        System.out.println("is level selected: " + getIsLevelSelected());
-//        System.out.println("Level: " + getDifficultyLevel());
-//
-//        System.out.println("is sprite selected: " + getIsSpriteSelected());
-//        System.out.println("Level: " + getSpriteSelected());
 
         String alertTitle = "";
         String alertMessage = "";
