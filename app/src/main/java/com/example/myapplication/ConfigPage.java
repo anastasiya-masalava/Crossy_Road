@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class ConfigPage extends AppCompatActivity {
-//    private Button startGamebtn;
     private TextView alertTextView;
     private boolean isLevelSelected = false;
     private boolean isSpriteSelected = false;
@@ -131,15 +130,28 @@ public class ConfigPage extends AppCompatActivity {
         });
         builder.show();
     }
+    
+    private boolean validateUserName(String userName){
+        if(userName.trim().length() < 1) {
+            return true;
+        } else if(userName.matches("")){
+            return true;
+        } else {
+            return false;
+        }
+    }
     public void startGame(View v){
         TextInputEditText textInputElement = findViewById(R.id.entered_name);
         String enteredName = textInputElement.getText().toString();
         setEnteredName(enteredName);
 
+        System.out.println("Name: " + enteredName);
+        System.out.println("Length: " + enteredName.trim().length());
+
         String alertTitle = "";
         String alertMessage = "";
 
-        if(getEnteredName().matches("")){
+        if(validateUserName(enteredName)){
             alertTitle = "name not entered!";
             alertMessage = "please enter you name to proceed";
             makeAlertBuilder(alertTitle, alertMessage);
@@ -154,7 +166,5 @@ public class ConfigPage extends AppCompatActivity {
         } else {
             startActivity(new Intent(ConfigPage.this, GamePage.class));
         }
-
     }
-
 }
