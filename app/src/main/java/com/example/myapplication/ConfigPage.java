@@ -62,6 +62,7 @@ public class ConfigPage extends AppCompatActivity {
     }
 
     public String getEnteredName(){
+        System.out.println(enteredName);
         return enteredName;
     }
 
@@ -149,19 +150,26 @@ public class ConfigPage extends AppCompatActivity {
         String alertMessage = "";
 
         if(validateUserName(enteredName)){
-            alertTitle = "name not entered!";
+            alertTitle = "Name not entered!";
             alertMessage = "please enter you name to proceed";
             makeAlertBuilder(alertTitle, alertMessage);
         } else if(!getIsLevelSelected()) {
-            alertTitle = "difficulty level is not selected!";
+            alertTitle = "Difficulty level is not selected!";
             alertMessage = "please select a difficulty level to proceed";
             makeAlertBuilder(alertTitle, alertMessage);
         } else if(!getIsSpriteSelected()) {
-            alertTitle = "sprite is not selected!";
+            alertTitle = "Sprite is not selected!";
             alertMessage = "please select a sprite to proceed";
             makeAlertBuilder(alertTitle, alertMessage);
         } else {
-            startActivity(new Intent(ConfigPage.this, GamePage.class));
+            System.out.println("ENTERED name: "+getEnteredName());
+            Bundle extras = new Bundle();
+            extras.putString("player_name", enteredName);
+            extras.putString("difficulty", difficultyLevel);
+            extras.putString("sprite", spriteSelected);
+            Intent intent = new Intent(ConfigPage.this, GamePage.class);
+            intent.putExtras(extras);
+            startActivity(intent);
         }
     }
 }
