@@ -5,9 +5,7 @@
     android:id="@+id/config_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2C2F31"
-    android:visibility="visible"
-    tools:visibility="visible">
+    android:background="#2C2F31">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -58,7 +56,8 @@
             android:textColor="#F8F4F4"
             android:textColorHighlight="#0FBC54"
             android:textColorLink="@color/green"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:onClick="onLevelSelected" />
 
         <RadioButton
             android:id="@+id/mediumLevel"
@@ -68,7 +67,8 @@
             android:text="Medium"
             android:textColor="#F4F0F0"
             android:textColorLink="@color/green"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:onClick="onLevelSelected"/>
 
         <RadioButton
             android:id="@+id/hardLevel"
@@ -79,7 +79,8 @@
             android:textColor="#F6F4F4"
 
             android:textColorLink="@color/green"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:onClick="onLevelSelected"/>
     </RadioGroup>
 
     <TextView
@@ -146,7 +147,8 @@
             android:drawableEnd="@drawable/frog_1"
             android:fontFamily="@font/galindo"
             android:textColor="#F6F4F4"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:onClick="onSpriteSelected" />
 
         <RadioButton
             android:id="@+id/fox"
@@ -154,14 +156,14 @@
             android:layout_height="81dp"
             android:layout_weight="1"
             android:baselineAligned="false"
-            android:text="RadioButton" />
+            android:onClick="onSpriteSelected" />
 
         <RadioButton
-            android:id="@+id/rabbit"
+            android:id="@+id/bunny"
             android:layout_width="wrap_content"
             android:layout_height="81dp"
             android:layout_weight="1"
-            android:text="RadioButton" />
+            android:onClick="onSpriteSelected" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
