@@ -7,15 +7,6 @@
     android:layout_height="match_parent"
     android:background="#2C2F31">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="-8dp">
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/entered_name"
         android:layout_width="323dp"
@@ -31,9 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.448"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <RadioGroup
         android:id="@+id/levels"
@@ -41,10 +30,10 @@
         android:layout_height="145dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entered_name"
-        app:layout_constraintVertical_bias="0.169">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.295">
 
 
         <RadioButton
@@ -52,35 +41,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/galindo"
+            android:onClick="onLevelSelected"
             android:text="Easy"
             android:textColor="#F8F4F4"
             android:textColorHighlight="#0FBC54"
             android:textColorLink="@color/green"
-            android:textSize="24sp"
-            android:onClick="onLevelSelected" />
+            android:textSize="24sp" />
 
         <RadioButton
             android:id="@+id/mediumLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/galindo"
+            android:onClick="onLevelSelected"
             android:text="Medium"
             android:textColor="#F4F0F0"
             android:textColorLink="@color/green"
-            android:textSize="24sp"
-            android:onClick="onLevelSelected"/>
+            android:textSize="24sp" />
 
         <RadioButton
             android:id="@+id/hardLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/galindo"
+            android:onClick="onLevelSelected"
             android:text="Hard"
-            android:textColor="#F6F4F4"
 
+            android:textColor="#F6F4F4"
             android:textColorLink="@color/green"
-            android:textSize="24sp"
-            android:onClick="onLevelSelected"/>
+            android:textSize="24sp" />
     </RadioGroup>
 
     <TextView
@@ -129,6 +118,7 @@
         app:layout_constraintVertical_bias="0.97" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="406dp"
         android:layout_height="164dp"
         android:orientation="horizontal"
@@ -141,36 +131,36 @@
 
         <RadioButton
             android:id="@+id/frog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="121dp"
+            android:layout_height="124dp"
             android:layout_weight="1"
             android:drawableEnd="@drawable/frog_1"
             android:fontFamily="@font/galindo"
+            android:onClick="onSpriteSelected"
             android:textColor="#F6F4F4"
-            android:textSize="24sp"
-            android:onClick="onSpriteSelected" />
+            android:textSize="24sp" />
 
         <RadioButton
             android:id="@+id/fox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="133dp"
+            android:layout_height="123dp"
             android:layout_weight="1"
             android:drawableEnd="@drawable/fox"
             android:fontFamily="@font/galindo"
+            android:onClick="onSpriteSelected"
             android:textColor="#F6F4F4"
-            android:textSize="24sp"
-            android:onClick="onSpriteSelected" />
+            android:textSize="24sp" />
 
         <RadioButton
             android:id="@+id/bunny"
-            android:layout_width="wrap_content"
+            android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawableEnd="@drawable/bunny"
             android:fontFamily="@font/galindo"
+            android:onClick="onSpriteSelected"
             android:textColor="#F6F4F4"
-            android:textSize="24sp"
-            android:onClick="onSpriteSelected" />
+            android:textSize="24sp" />
     </RadioGroup>
 
     <TextView
