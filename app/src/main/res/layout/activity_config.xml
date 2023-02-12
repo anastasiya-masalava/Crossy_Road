@@ -141,8 +141,8 @@
 
         <RadioButton
             android:id="@+id/frog"
-            android:layout_width="107dp"
-            android:layout_height="81dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawableEnd="@drawable/frog_1"
             android:fontFamily="@font/galindo"
@@ -153,16 +153,23 @@
         <RadioButton
             android:id="@+id/fox"
             android:layout_width="wrap_content"
-            android:layout_height="81dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:baselineAligned="false"
+            android:drawableEnd="@drawable/fox"
+            android:fontFamily="@font/galindo"
+            android:textColor="#F6F4F4"
+            android:textSize="24sp"
             android:onClick="onSpriteSelected" />
 
         <RadioButton
             android:id="@+id/bunny"
             android:layout_width="wrap_content"
-            android:layout_height="81dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:drawableEnd="@drawable/bunny"
+            android:fontFamily="@font/galindo"
+            android:textColor="#F6F4F4"
+            android:textSize="24sp"
             android:onClick="onSpriteSelected" />
     </RadioGroup>
 
