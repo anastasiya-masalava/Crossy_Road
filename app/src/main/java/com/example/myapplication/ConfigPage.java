@@ -130,7 +130,7 @@ public class ConfigPage extends AppCompatActivity {
         });
         builder.show();
     }
-    
+
     private boolean validateUserName(String userName){
         if(userName.trim().length() < 1) {
             return true;
@@ -144,9 +144,6 @@ public class ConfigPage extends AppCompatActivity {
         TextInputEditText textInputElement = findViewById(R.id.entered_name);
         String enteredName = textInputElement.getText().toString();
         setEnteredName(enteredName);
-
-        System.out.println("Name: " + enteredName);
-        System.out.println("Length: " + enteredName.trim().length());
 
         String alertTitle = "";
         String alertMessage = "";
