@@ -19,6 +19,7 @@
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="24sp"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.465"
