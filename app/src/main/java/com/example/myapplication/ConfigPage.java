@@ -3,9 +3,7 @@ package com.example.myapplication;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -22,46 +20,47 @@ public class ConfigPage extends AppCompatActivity {
     private String spriteSelected;
     private String enteredName;
 
-    public void setAlertTextView(TextView textView){
+    public void setAlertTextView(TextView textView) {
         this.alertTextView = textView;
     }
-    public void setIsLevelSelected(boolean isSelected){
+
+    public void setIsLevelSelected(boolean isSelected) {
         this.isLevelSelected = isSelected;
     }
 
-    public boolean getIsLevelSelected(){
+    public boolean getIsLevelSelected() {
         return isLevelSelected;
     }
 
-    public void setDifficultyLevel(String difficultyLevel){
+    public void setDifficultyLevel(String difficultyLevel) {
         this.difficultyLevel = difficultyLevel;
     }
 
-    public String getDifficultyLevel(){
+    public String getDifficultyLevel() {
         return difficultyLevel;
     }
 
-    public void setIsSpriteSelected(boolean isSelected){
+    public void setIsSpriteSelected(boolean isSelected) {
         this.isSpriteSelected = isSelected;
     }
 
-    public boolean getIsSpriteSelected(){
+    public boolean getIsSpriteSelected() {
         return isSpriteSelected;
     }
 
-    public void setSpriteSelected(String spriteSelected){
+    public void setSpriteSelected(String spriteSelected) {
         this.spriteSelected = spriteSelected;
     }
 
-    public String getSpriteSelected(){
+    public String getSpriteSelected() {
         return spriteSelected;
     }
 
-    public void setEnteredName(String enteredName){
+    public void setEnteredName(String enteredName) {
         this.enteredName = enteredName;
     }
 
-    public String getEnteredName(){
+    public String getEnteredName() {
         System.out.println(enteredName);
         return enteredName;
     }
@@ -72,20 +71,24 @@ public class ConfigPage extends AppCompatActivity {
         setIsLevelSelected(checked);
 
         // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.easyLevel:
-                if (checked)
-                    setDifficultyLevel("Easy");
-                    break;
-            case R.id.mediumLevel:
-                if (checked)
-                    setDifficultyLevel("Medium");
-                    break;
-
-            case R.id.hardLevel:
-                if (checked)
-                    setDifficultyLevel("Hard");
-                    break;
+        switch (view.getId()) {
+        case R.id.easyLevel:
+            if (checked) {
+                setDifficultyLevel("Easy");
+            }
+            break;
+        case R.id.mediumLevel:
+            if (checked) {
+                setDifficultyLevel("Medium");
+            }
+            break;
+        case R.id.hardLevel:
+            if (checked) {
+                setDifficultyLevel("Hard");
+            }
+            break;
+        default:
+            throw new RuntimeException("Impossible Case.");
         }
     }
 
@@ -95,28 +98,35 @@ public class ConfigPage extends AppCompatActivity {
         setIsSpriteSelected(checked);
 
         // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.frog:
-                if (checked)
-                    setSpriteSelected("Frog");
-                break;
-            case R.id.fox:
-                if (checked)
-                    setSpriteSelected("Fox");
-                break;
+        switch (view.getId()) {
+        case R.id.frog:
+            if (checked) {
+                setSpriteSelected("Frog");
+            }
+            break;
+        case R.id.fox:
+            if (checked) {
+                setSpriteSelected("Fox");
+            }
+            break;
 
-            case R.id.bunny:
-                if (checked)
-                    setSpriteSelected("Bunny");
-                break;
+        case R.id.bunny:
+            if (checked) {
+                setSpriteSelected("Bunny");
+            }
+            break;
+        default:
+            throw new RuntimeException("Impossible Case.");
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
     }
-    public void makeAlertBuilder(String alertTitle, String alertMessage){
+
+    public void makeAlertBuilder(String alertTitle, String alertMessage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(ConfigPage.this);
 
         builder.setCancelable(false);
@@ -132,16 +142,14 @@ public class ConfigPage extends AppCompatActivity {
         builder.show();
     }
 
-    private boolean validateUserName(String userName){
-        if(userName.trim().length() < 1) {
+    private boolean validateUserName(String userName) {
+        if (userName.trim().length() < 1) {
             return true;
-        } else if(userName.matches("")){
-            return true;
-        } else {
-            return false;
         }
+        return userName.matches("");
     }
-    public void startGame(View v){
+
+    public void startGame(View v) {
         TextInputEditText textInputElement = findViewById(R.id.entered_name);
         String enteredName = textInputElement.getText().toString();
         setEnteredName(enteredName);
@@ -149,20 +157,20 @@ public class ConfigPage extends AppCompatActivity {
         String alertTitle = "";
         String alertMessage = "";
 
-        if(validateUserName(enteredName)){
+        if (validateUserName(enteredName)) {
             alertTitle = "Name not entered!";
             alertMessage = "please enter you name to proceed";
             makeAlertBuilder(alertTitle, alertMessage);
-        } else if(!getIsLevelSelected()) {
+        } else if (!getIsLevelSelected()) {
             alertTitle = "Difficulty level is not selected!";
             alertMessage = "please select a difficulty level to proceed";
             makeAlertBuilder(alertTitle, alertMessage);
-        } else if(!getIsSpriteSelected()) {
+        } else if (!getIsSpriteSelected()) {
             alertTitle = "Sprite is not selected!";
             alertMessage = "please select a sprite to proceed";
             makeAlertBuilder(alertTitle, alertMessage);
         } else {
-            System.out.println("ENTERED name: "+getEnteredName());
+            System.out.println("ENTERED name: " + getEnteredName());
             Bundle extras = new Bundle();
             extras.putString("player_name", enteredName);
             extras.putString("difficulty", difficultyLevel);
