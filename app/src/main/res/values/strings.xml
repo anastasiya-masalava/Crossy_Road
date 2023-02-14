@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Frog Runaway</string>
+    <string name="play">Play!</string>
+    <string name="welcome_to_frog_runaway">Welcome to Frog Runaway!</string>
+    <string name="exit">Exit</string>
 </resources>

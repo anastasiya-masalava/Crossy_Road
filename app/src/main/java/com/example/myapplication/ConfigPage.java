@@ -143,10 +143,7 @@ public class ConfigPage extends AppCompatActivity {
     }
 
     private boolean validateUserName(String userName) {
-        if (userName.trim().length() < 1) {
-            return true;
-        }
-        return userName.matches("");
+        return (userName == null || userName.trim().length() < 1);
     }
 
     public void startGame(View v) {
@@ -159,15 +156,15 @@ public class ConfigPage extends AppCompatActivity {
 
         if (validateUserName(enteredName)) {
             alertTitle = "Name not entered!";
-            alertMessage = "please enter you name to proceed";
+            alertMessage = "Please enter a valid name to proceed";
             makeAlertBuilder(alertTitle, alertMessage);
         } else if (!getIsLevelSelected()) {
             alertTitle = "Difficulty level is not selected!";
-            alertMessage = "please select a difficulty level to proceed";
+            alertMessage = "Please select a difficulty level to proceed";
             makeAlertBuilder(alertTitle, alertMessage);
         } else if (!getIsSpriteSelected()) {
             alertTitle = "Sprite is not selected!";
-            alertMessage = "please select a sprite to proceed";
+            alertMessage = "Please select a sprite to proceed";
             makeAlertBuilder(alertTitle, alertMessage);
         } else {
             System.out.println("ENTERED name: " + getEnteredName());

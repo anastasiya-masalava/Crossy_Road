@@ -22,7 +22,7 @@
         android:rotationY="0"
         android:scaleX="0.6"
         android:scaleY="0.6"
-        android:text="Welcome to Frog Runaway!"
+        android:text="@string/welcome_to_frog_runaway"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#FFFFFF"
@@ -37,18 +37,37 @@
 
     <Button
         android:id="@+id/play_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
         android:background="@color/white"
         android:backgroundTint="#0FBC54"
         android:fontFamily="@font/galindo"
         android:onClick="toConfigPage"
-        android:text="Play!"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        android:text="@string/play"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@id/textView2"
         app:layout_constraintVertical_bias="0.809" />
+
+    <Button
+        android:id="@+id/exit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@color/red"
+        android:backgroundTint="@color/red"
+        android:fontFamily="@font/galindo"
+        android:onClick="exitApp"
+        android:text="@string/exit"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textView2"
+        app:layout_constraintVertical_bias="0.905"
+        app:backgroundTint="#A4FF0000" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

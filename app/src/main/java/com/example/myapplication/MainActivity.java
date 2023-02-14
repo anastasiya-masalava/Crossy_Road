@@ -17,4 +17,8 @@ public class MainActivity extends AppCompatActivity {
     public void toConfigPage(View v) {
         startActivity(new Intent(MainActivity.this, ConfigPage.class));
     }
+
+    public void exitApp(View v) {
+        this.finishAffinity(); //ебать мощно
+    }
 }
