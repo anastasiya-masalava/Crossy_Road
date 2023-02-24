@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:fontFamily="@font/galindo"
+        android:fontFamily="sans-serif-thin"
         android:rotation="0"
         android:rotationX="-2"
         android:rotationY="0"
@@ -41,7 +41,7 @@
         android:layout_height="50dp"
         android:background="@color/white"
         android:backgroundTint="#0FBC54"
-        android:fontFamily="@font/galindo"
+        android:fontFamily="sans-serif-thin"
         android:onClick="toConfigPage"
         android:text="@string/play"
         android:textColor="#FFFFFF"
@@ -58,16 +58,16 @@
         android:layout_height="40dp"
         android:background="@color/red"
         android:backgroundTint="@color/red"
-        android:fontFamily="@font/galindo"
+        android:fontFamily="sans-serif-thin"
         android:onClick="exitApp"
         android:text="@string/exit"
         android:textColor="#FFFFFF"
+        app:backgroundTint="#A4FF0000"
         app:layout_constraintBottom_toBottomOf="@id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/textView2"
-        app:layout_constraintVertical_bias="0.905"
-        app:backgroundTint="#A4FF0000" />
+        app:layout_constraintVertical_bias="0.905" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
