@@ -2,16 +2,37 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class GamePage extends ConfigPage {
+    GridView simpleGrid;
+    int logos[] = {
+                    R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass,R.drawable.grass,
+                    R.drawable.grass,R.drawable.grass,R.drawable.grass,R.drawable.grass,R.drawable.grass,
+                    R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
+                    R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,
+                    R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,
+                    R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,
+                    R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river, R.drawable.river,
+                    R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,
+                    R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,
+                    R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,
+                    R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,R.drawable.road,
+                    R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,
+                    R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,
+                    R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,
+                    R.drawable.start,R.drawable.start,R.drawable.start,R.drawable.start,R.drawable.start, R.drawable.start,
+                    R.drawable.start,R.drawable.start,R.drawable.start,R.drawable.start,R.drawable.start,};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
+        simpleGrid = (GridView) findViewById(R.id.game_grid);
+        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), logos);
+        simpleGrid.setAdapter(customAdapter);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         //  player name from ConfigPage
