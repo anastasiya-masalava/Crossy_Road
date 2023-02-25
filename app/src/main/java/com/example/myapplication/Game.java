@@ -13,7 +13,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameLoop gameLoop;
     private final Player player;
-    public Game(Context context) {
+    public Game(Context context, String player_name, Bitmap inBitmap, int lives) {
         super(context);
 
         //Gets the surface holder and adds callback to game
@@ -27,7 +27,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         // Convert the drawable resource to a Bitmap
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resId);
 
-        this.player = new Player(getContext(), bitmap, 5, "Dennis");
+        this.player = new Player(getContext(), inBitmap, lives, player_name);
 
         this.setFocusable(true);
     }
@@ -39,7 +39,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
     }
 
     @Override
