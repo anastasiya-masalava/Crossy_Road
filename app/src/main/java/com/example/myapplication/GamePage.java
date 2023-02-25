@@ -1,6 +1,10 @@
 package com.example.myapplication;
 
+import static java.lang.Integer.parseInt;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -70,6 +74,12 @@ public class GamePage extends ConfigPage {
                     this.getResources().getIdentifier("bunny", "drawable", this.getPackageName());
         }
         imageView.setImageResource(drawableResourceId);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableResourceId);
+        Player player = new Player(getApplicationContext(), bitmap, parseInt(lives), playerName);
+
+
+
 
     }
 }
