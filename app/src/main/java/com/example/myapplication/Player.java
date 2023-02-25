@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.widget.ImageView;
 
@@ -20,10 +21,13 @@ public class Player {
         this.bitmap = bitmap;
         this.lives = lives;
         this.name = name;
+        posX = 500;
+        posY = 500;
     }
 
     public void draw(Canvas canvas) {
         Paint paint = new Paint();
+        canvas.drawColor(Color.GRAY);
         canvas.drawBitmap(bitmap, posX, posY, paint);
         drawLives(canvas);
         drawName(canvas);
@@ -45,9 +49,10 @@ public class Player {
         // An example of update method
         // It will actually take input from the controller
         // to tell it to move left, right, up, or down
-        String command = "left";
-        if (command.equals("left")) {
-            this.posX = this.posX - 20;
-        }
+//        String command = "left";
+//        if (command.equals("left")) {
+//            this.posX = this.posX - 20;
+//        }
+        ;
     }
 }

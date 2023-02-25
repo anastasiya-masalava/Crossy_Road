@@ -41,6 +41,7 @@ public class GameLoop extends Thread{
     @Override
     public void run() {
         super.run();
+        System.out.println("Entered run() in GameLoop");
 
         int updatesCounter = 0;
         int framesCounter = 0;
@@ -50,6 +51,9 @@ public class GameLoop extends Thread{
         Canvas canvas = null;
 
         startTime = System.currentTimeMillis();
+
+        // Height: 1648
+        // Width: 1080
 
         while(isRunning) {
             try {
