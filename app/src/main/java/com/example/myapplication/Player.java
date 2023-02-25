@@ -25,9 +25,29 @@ public class Player {
     public void draw(Canvas canvas) {
         Paint paint = new Paint();
         canvas.drawBitmap(bitmap, posX, posY, paint);
+        drawLives(canvas);
+        drawName(canvas);
+    }
+
+    private void drawLives(Canvas canvas) {
+        Paint paint = new Paint();
+        String livesText = "Lives: " + this.lives;
+        canvas.drawText(livesText, 50, 50, paint);
+    }
+
+    private void drawName(Canvas canvas) {
+        Paint paint = new Paint();
+        String levelText = "Name: " + this.name;
+        canvas.drawText(levelText, 150, 50, paint);
     }
 
     public void update() {
-        ;
+        // An example of update method
+        // It will actually take input from the controller
+        // to tell it to move left, right, up, or down
+        String command = "left";
+        if (command.equals("left")) {
+            this.posX = this.posX - 20;
+        }
     }
 }
