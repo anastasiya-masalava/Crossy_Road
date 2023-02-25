@@ -33,7 +33,8 @@ public class GamePage extends ConfigPage {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+        setContentView(new Game(this));
+        // setContentView(R.layout.activity_game); --temporary change
         simpleGrid = (GridView) findViewById(R.id.game_grid);
         CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), logos);
         simpleGrid.setAdapter(customAdapter);
