@@ -5,6 +5,7 @@ import static java.lang.Integer.parseInt;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -63,9 +64,25 @@ public class GamePage extends ConfigPage {
                     this.getResources().getIdentifier("bunny", "drawable", this.getPackageName());
         }
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableResourceId);
+        bitmap = getResizedBitmap(bitmap, 150, 150);
         Game new_game = new Game(this, playerName, bitmap, lives);
         setContentView(new_game);
 
 
     }
+
+    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        Bitmap resizedBitmap = Bitmap.createBitmap(
+                bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
+    }
+
 }

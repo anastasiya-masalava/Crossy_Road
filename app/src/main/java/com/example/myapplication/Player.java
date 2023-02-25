@@ -25,24 +25,25 @@ public class Player {
         posY = 500;
     }
 
-    public void draw(Canvas canvas) {
+    public void draw(Canvas canvas, int marginleft, int marginup, int unit) {
         Paint paint = new Paint();
-        canvas.drawColor(Color.GRAY);
-        canvas.drawBitmap(bitmap, posX, posY, paint);
-        drawLives(canvas);
-        drawName(canvas);
+        final float testTextSize = 100f;
+        paint.setTextSize(testTextSize);
+        canvas.drawBitmap(bitmap, marginleft, marginup-75 + unit/2, paint);
+        drawLives(canvas, paint);
+        drawName(canvas, paint);
     }
 
-    private void drawLives(Canvas canvas) {
-        Paint paint = new Paint();
+    private void drawLives(Canvas canvas, Paint paint) {
+//        Paint paint = new Paint();
         String livesText = "Lives: " + this.lives;
-        canvas.drawText(livesText, 50, 50, paint);
+        canvas.drawText(livesText, 50, 150, paint);
     }
 
-    private void drawName(Canvas canvas) {
-        Paint paint = new Paint();
+    private void drawName(Canvas canvas, Paint paint) {
+//        Paint paint = new Paint();
         String levelText = "Name: " + this.name;
-        canvas.drawText(levelText, 150, 50, paint);
+        canvas.drawText(levelText, 0, 150, paint);
     }
 
     public void update() {
