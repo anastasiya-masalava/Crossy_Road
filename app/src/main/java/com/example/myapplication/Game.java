@@ -18,7 +18,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
 
 //    private final Mapp map;
-    public Game(Context context, String player_name, Bitmap inBitmap, int lives) {
+    public Game(Context context, String player_name, Bitmap inBitmap, int lives, Bitmap bitmap2, Bitmap bitmap3) {
         super(context);
 
         //Gets the surface holder and adds callback to game
@@ -26,14 +26,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         surfaceHolder.addCallback(this);
 
         this.gameLoop = new GameLoop(this, surfaceHolder);
-//        // Get the drawable resource ID
-//        int resId = R.drawable.frog_1; //я правилно понимаю нам потом это нужно будет изменить??
-//
-//        // Convert the drawable resource to a Bitmap
-//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resId);
 
-        this.player = new Player(getContext(), inBitmap, lives, player_name);
-//        this.map = new Mapp(getContext());
+        this.player = new Player(getContext(), inBitmap, lives, player_name, bitmap2, bitmap3);
 
         this.setFocusable(true);
     }
@@ -122,7 +116,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         Bitmap resizedBitmap = Bitmap.createBitmap(
                 bm, 0, 0, width, height, matrix, false);
-        bm.recycle();
         return resizedBitmap;
     }
 }

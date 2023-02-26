@@ -14,22 +14,22 @@ import android.widget.TextView;
 public class GamePage extends ConfigPage {
     GridView simpleGrid;
     int logos[] = {
-                    R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass,R.drawable.grass,
-                    R.drawable.grass,R.drawable.grass,R.drawable.grass,R.drawable.grass,R.drawable.grass,
-                    R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
-                    R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,
-                    R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,
-                    R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,
-                    R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river, R.drawable.river,
-                    R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,
-                    R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,
-                    R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,R.drawable.river,
-                    R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,R.drawable.road,
-                    R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,
-                    R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,
-                    R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,R.drawable.road,
-                    R.drawable.start,R.drawable.start,R.drawable.start,R.drawable.start,R.drawable.start, R.drawable.start,
-                    R.drawable.start,R.drawable.start,R.drawable.start,R.drawable.start,R.drawable.start,};
+            R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass,
+            R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass,
+            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
+            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
+            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
+            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
+            R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river,
+            R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river,
+            R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river,
+            R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river,
+            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
+            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
+            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
+            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
+            R.drawable.start, R.drawable.start, R.drawable.start, R.drawable.start, R.drawable.start, R.drawable.start,
+            R.drawable.start, R.drawable.start, R.drawable.start, R.drawable.start, R.drawable.start,};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,8 @@ public class GamePage extends ConfigPage {
 
         String playerName = extras.getString("player_name");
         System.out.println("Player:" + playerName);
-        String difficulty = extras.getString("difficulty");;
+        String difficulty = extras.getString("difficulty");
+        ;
         System.out.println("Difficulty:" + difficulty);
         int lives;
         if (difficulty.equals("Easy")) {
@@ -64,8 +65,12 @@ public class GamePage extends ConfigPage {
                     this.getResources().getIdentifier("bunny", "drawable", this.getPackageName());
         }
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableResourceId);
+        Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.lifes);
+        Bitmap bitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.coin);
         bitmap = getResizedBitmap(bitmap, 150, 150);
-        Game new_game = new Game(this, playerName, bitmap, lives);
+        bitmap2 = getResizedBitmap(bitmap2, 100, 100);
+        bitmap3 = getResizedBitmap(bitmap3, 150, 150);
+        Game new_game = new Game(this, playerName, bitmap, lives, bitmap2, bitmap3);
         setContentView(new_game);
 
 
@@ -84,5 +89,6 @@ public class GamePage extends ConfigPage {
         bm.recycle();
         return resizedBitmap;
     }
+
 
 }
