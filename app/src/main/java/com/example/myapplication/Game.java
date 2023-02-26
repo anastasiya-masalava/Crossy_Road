@@ -65,7 +65,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void draw(Canvas canvas) {
         super.draw(canvas);
 
-        canvas.drawColor(Color.GRAY);
+        canvas.drawRGB(41, 41, 41);
 
         drawMap(canvas);
         player.draw(canvas, (int) (marginleft + (unit+onepixel)*5 - unit*0.15), (int) (marginup + (unitHeight+onepixel)*14 + ( - 1.3*unit + unitHeight)), unit);

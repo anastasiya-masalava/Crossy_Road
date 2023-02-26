@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -52,6 +53,7 @@ public class Player {
     public void draw(Canvas canvas, int marginleft, int marginup, int unit) {
         Paint paint = new Paint();
         final float testTextSize = 70f;
+        paint.setColor(Color.WHITE);
         paint.setTextSize(testTextSize);
         canvas.drawBitmap(bitmap, marginleft, marginup, paint);
         canvas.drawBitmap(bitmap2, 50, 75, paint);

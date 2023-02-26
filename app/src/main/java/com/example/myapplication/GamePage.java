@@ -84,10 +84,10 @@ public class GamePage extends ConfigPage {
         Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.lifes);
         Bitmap bitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.coin);
 
-        Bitmap bitmap4 = BitmapFactory.decodeResource(getResources(), R.drawable.button_down);
-        Bitmap bitmap5 = BitmapFactory.decodeResource(getResources(), R.drawable.button_up);
-        Bitmap bitmap6 = BitmapFactory.decodeResource(getResources(), R.drawable.button_right);
-        Bitmap bitmap7 = BitmapFactory.decodeResource(getResources(), R.drawable.button_left);
+        Bitmap bitmap4 = BitmapFactory.decodeResource(getResources(), R.drawable.down_arrow);
+        Bitmap bitmap5 = BitmapFactory.decodeResource(getResources(), R.drawable.up_arrow);
+        Bitmap bitmap6 = BitmapFactory.decodeResource(getResources(), R.drawable.right_arrow);
+        Bitmap bitmap7 = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow);
         //size of player will be 1.3 unit x 1.3 unit
         bitmap = getResizedBitmap(bitmap, (int) ((int) unit*1.3), (int) ((int) unit*1.3));
         bitmap2 = getResizedBitmap(bitmap2, 100, 100);
