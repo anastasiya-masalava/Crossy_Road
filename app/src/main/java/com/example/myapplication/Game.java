@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.util.DisplayMetrics;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -16,9 +17,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameLoop gameLoop;
     private final Player player;
-
+    private int onepixel;
+    private int unit;
+    private int unitHeight;
+    private int marginleft;
+    private int marginup;
 //    private final Mapp map;
-    public Game(Context context, String player_name, Bitmap inBitmap, int lives, Bitmap bitmap2, Bitmap bitmap3) {
+    public Game(Context context, String player_name, Bitmap inBitmap, int lives, Bitmap bitmap2, Bitmap bitmap3, int width, int height, int unit, int onepixel, int unitHeight, int marginleft, int marginup) {
         super(context);
 
         //Gets the surface holder and adds callback to game
@@ -26,6 +31,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         surfaceHolder.addCallback(this);
 
         this.gameLoop = new GameLoop(this, surfaceHolder);
+
+        this.onepixel = onepixel;
+        this.unit = unit;
+        this.unitHeight = unitHeight;
+        this.marginleft = marginleft;
+        this.marginup = marginup;
+
 
         this.player = new Player(getContext(), inBitmap, lives, player_name, bitmap2, bitmap3);
 
@@ -49,56 +61,46 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-//        System.out.println(getWidth() + " " + getHeight());
-
-        int width = getWidth();
-        int height = getHeight();
-        int onepixel = 3;
-        int unit = (width - onepixel*11) / 12;
-        int marginleft = (int) ((int) unit * 0.5);
-        int marginup = 250;
-        System.out.println("unit "+ unit);
 
         canvas.drawColor(Color.GRAY);
 
-
-        drawMap(canvas, unit, marginleft, marginup, onepixel);
-        player.draw(canvas, marginleft + (unit+onepixel)*5, marginup + (unit+onepixel)*14, unit);
+        drawMap(canvas);
+        player.draw(canvas, (int) (marginleft + (unit+onepixel)*5 - unit*0.15), (int) (marginup + (unitHeight+onepixel)*14 + ( - 1.3*unit + unitHeight)), unit);
 
     }
 
-    public void drawMap(Canvas canvas, int unit, int marginleft, int marginup, int onepixel){
+    public void drawMap(Canvas canvas){
 
 
 //        int drawRIdRiver = R.drawable.river;
 ////                this.getResources().getIdentifier("bunny", "drawable", this.getPackageName());
 //        int drawRIdRoad = R.drawable.road;
 //        int drawRIdStart = R.drawable.start;
-        Bitmap bitmapRiver = getResizedBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.river), unit, unit);
-        Bitmap bitmapRoad = getResizedBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.road), unit, unit);
-        Bitmap bitmapStart = getResizedBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.start), unit, unit);
-        Bitmap bitmapGrass = getResizedBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.grass), unit, unit);
+        Bitmap bitmapRiver = getResizedBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.river), unit, unitHeight);
+        Bitmap bitmapRoad = getResizedBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.road), unit, unitHeight);
+        Bitmap bitmapStart = getResizedBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.start), unit, unitHeight);
+        Bitmap bitmapGrass = getResizedBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.grass), unit, unitHeight);
         Paint paint = new Paint();
-        drawLine(canvas, 0, paint, unit, marginleft, marginup, bitmapGrass, onepixel);
-        drawLine(canvas, 1, paint, unit, marginleft, marginup, bitmapGrass, onepixel);
-        drawLine(canvas, 2, paint, unit, marginleft, marginup, bitmapRiver, onepixel);
-        drawLine(canvas, 3, paint, unit, marginleft, marginup, bitmapRiver, onepixel);
-        drawLine(canvas, 4, paint, unit, marginleft, marginup, bitmapRiver, onepixel);
-        drawLine(canvas, 5, paint, unit, marginleft, marginup, bitmapRiver, onepixel);
-        drawLine(canvas, 6, paint, unit, marginleft, marginup, bitmapStart, onepixel);
-        drawLine(canvas, 7, paint, unit, marginleft, marginup, bitmapRoad, onepixel);
-        drawLine(canvas, 8, paint, unit, marginleft, marginup, bitmapRoad, onepixel);
-        drawLine(canvas, 9, paint, unit, marginleft, marginup, bitmapRoad, onepixel);
-        drawLine(canvas, 10, paint, unit, marginleft, marginup, bitmapRoad, onepixel);
-        drawLine(canvas, 11, paint, unit, marginleft, marginup, bitmapRoad, onepixel);
-        drawLine(canvas, 12, paint, unit, marginleft, marginup, bitmapRoad, onepixel);
-        drawLine(canvas, 13, paint, unit, marginleft, marginup, bitmapRoad, onepixel);
-        drawLine(canvas, 14, paint, unit, marginleft, marginup, bitmapStart, onepixel);
+        drawLine(canvas, 0, paint, unit, unitHeight, marginleft, marginup, bitmapGrass, onepixel);
+        drawLine(canvas, 1, paint, unit, unitHeight, marginleft, marginup, bitmapGrass, onepixel);
+        drawLine(canvas, 2, paint, unit, unitHeight, marginleft, marginup, bitmapRiver, onepixel);
+        drawLine(canvas, 3, paint, unit, unitHeight, marginleft, marginup, bitmapRiver, onepixel);
+        drawLine(canvas, 4, paint, unit, unitHeight, marginleft, marginup, bitmapRiver, onepixel);
+        drawLine(canvas, 5, paint, unit, unitHeight, marginleft, marginup, bitmapRiver, onepixel);
+        drawLine(canvas, 6, paint, unit, unitHeight, marginleft, marginup, bitmapStart, onepixel);
+        drawLine(canvas, 7, paint, unit, unitHeight, marginleft, marginup, bitmapRoad, onepixel);
+        drawLine(canvas, 8, paint, unit, unitHeight, marginleft, marginup, bitmapRoad, onepixel);
+        drawLine(canvas, 9, paint, unit, unitHeight, marginleft, marginup, bitmapRoad, onepixel);
+        drawLine(canvas, 10, paint, unit,unitHeight,  marginleft, marginup, bitmapRoad, onepixel);
+        drawLine(canvas, 11, paint, unit,unitHeight,  marginleft, marginup, bitmapRoad, onepixel);
+        drawLine(canvas, 12, paint, unit,unitHeight,  marginleft, marginup, bitmapRoad, onepixel);
+        drawLine(canvas, 13, paint, unit,unitHeight,  marginleft, marginup, bitmapRoad, onepixel);
+        drawLine(canvas, 14, paint, unit,unitHeight,  marginleft, marginup, bitmapStart, onepixel);
     }
 
-    public void drawLine(Canvas canvas, int row, Paint paint, int unit, int marginleft, int marginup, Bitmap bitmap, int onepixel){
+    public void drawLine(Canvas canvas, int row, Paint paint, int unit, int unitHeight, int marginleft, int marginup, Bitmap bitmap, int onepixel){
         for (int i = 0; i < 11; i++) {
-            canvas.drawBitmap(bitmap, marginleft + i*unit + (i)*onepixel, marginup + row*(unit + onepixel), paint);
+            canvas.drawBitmap(bitmap, marginleft + i*unit + (i)*onepixel, marginup + row*(unitHeight + onepixel), paint);
         }
     }
 

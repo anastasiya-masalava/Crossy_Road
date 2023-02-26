@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -64,13 +65,33 @@ public class GamePage extends ConfigPage {
             drawableResourceId =
                     this.getResources().getIdentifier("bunny", "drawable", this.getPackageName());
         }
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+
+        int onepixel = 3;
+        int unit = (width - onepixel*11) / 12;
+        int unitHeight = (height - onepixel*11)/25;
+        int marginleft = (int) ((int) unit * 0.5);
+        int marginup = 250;
+
+
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableResourceId);
         Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.lifes);
         Bitmap bitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.coin);
-        bitmap = getResizedBitmap(bitmap, 150, 150);
+        //size of player will be 1.3 unit x 1.3 unit
+        bitmap = getResizedBitmap(bitmap, (int) ((int) unit*1.3), (int) ((int) unit*1.3));
         bitmap2 = getResizedBitmap(bitmap2, 100, 100);
         bitmap3 = getResizedBitmap(bitmap3, 150, 150);
-        Game new_game = new Game(this, playerName, bitmap, lives, bitmap2, bitmap3);
+
+
+//        System.out.println(width + " " + height);
+
+        Game new_game = new Game(this, playerName, bitmap, lives, bitmap2, bitmap3, width, height, unit, onepixel, unitHeight, marginleft, marginup);
         setContentView(new_game);
 
 

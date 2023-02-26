@@ -34,7 +34,7 @@ public class Player {
         Paint paint = new Paint();
         final float testTextSize = 70f;
         paint.setTextSize(testTextSize);
-        canvas.drawBitmap(bitmap, marginleft, marginup - 75 + unit / 2, paint);
+        canvas.drawBitmap(bitmap, marginleft, marginup, paint);
         canvas.drawBitmap(bitmap2, 50, 75, paint);
         canvas.drawBitmap(bitmap3, canvas.getWidth() - 250, 55, paint);
         drawLives(canvas, paint);
