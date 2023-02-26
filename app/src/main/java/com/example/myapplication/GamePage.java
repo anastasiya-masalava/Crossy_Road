@@ -14,6 +14,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class GamePage extends ConfigPage {
+    public static int getChange_x() {
+        return change_x;
+    }
+
+    public static int getChange_y() {
+        return change_y;
+    }
+
+    public static void setChange_x(int change_x) {
+        GamePage.change_x = change_x;
+    }
+
+    public static void setChange_y(int change_y) {
+        GamePage.change_y = change_y;
+    }
+
+    private static int change_x = 0;
+    private static int change_y = 0;
     GridView simpleGrid;
     int logos[] = {
             R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass,
@@ -77,8 +95,10 @@ public class GamePage extends ConfigPage {
         int onepixel = 3;
         int marginleft = 5;
         int marginup = 250;
-        int unit = (width - onepixel*11 - marginleft*2) / 11;
-        int unitHeight = (height - onepixel*11)/25;
+        int unit = (width - onepixel * 11 - marginleft * 2) / 11;
+        int unitHeight = (height - onepixel * 11) / 25;
+        System.out.println("Unit:" + unit);
+        System.out.println("unitHeight:" + unitHeight);
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableResourceId);
         Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.lifes);
@@ -89,14 +109,13 @@ public class GamePage extends ConfigPage {
         Bitmap bitmap6 = BitmapFactory.decodeResource(getResources(), R.drawable.right_arrow);
         Bitmap bitmap7 = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow);
         //size of player will be 1.3 unit x 1.3 unit
-        bitmap = getResizedBitmap(bitmap, (int) ((int) unit*1.3), (int) ((int) unit*1.3));
+        bitmap = getResizedBitmap(bitmap, (int) ((int) unit * 1.3), (int) ((int) unit * 1.3));
         bitmap2 = getResizedBitmap(bitmap2, 100, 100);
         bitmap3 = getResizedBitmap(bitmap3, 150, 150);
         bitmap4 = getResizedBitmap(bitmap4, 150, 150);
         bitmap5 = getResizedBitmap(bitmap5, 150, 150);
         bitmap6 = getResizedBitmap(bitmap6, 150, 150);
         bitmap7 = getResizedBitmap(bitmap7, 150, 150);
-
 
 
 //        System.out.println(width + " " + height);
@@ -122,22 +141,22 @@ public class GamePage extends ConfigPage {
         int btny = 1660;
 
         if (x >= btn1x - buttonSize && x <= btn1x + buttonSize
-            && y >= btny - buttonSize && y <= btny + buttonSize) {
-            System.out.println("Button 1 pressed");
-        }
-        else if (x >= btn2x - buttonSize && x <= btn2x + buttonSize
+                && y >= btny - buttonSize && y <= btny + buttonSize) {
+            System.out.println("Button 1 pressed");//down
+            change_y += 1;
+        } else if (x >= btn2x - buttonSize && x <= btn2x + buttonSize
                 && y >= btny - buttonSize && y <= btny + buttonSize) {
             System.out.println("Button 2 pressed");
-        }
-        else if (x >= btn3x - buttonSize && x <= btn3x + buttonSize
+            change_y -= 1;
+        } else if (x >= btn3x - buttonSize && x <= btn3x + buttonSize
                 && y >= btny - buttonSize && y <= btny + buttonSize) {
             System.out.println("Button 3 pressed");
-        }
-        else if (x >= btn4x - buttonSize && x <= btn4x + buttonSize
+            change_x += 1;
+        } else if (x >= btn4x - buttonSize && x <= btn4x + buttonSize
                 && y >= btny - buttonSize && y <= btny + buttonSize) {
             System.out.println("Button 4 pressed");
+            change_x -= 1;
         }
-
         return true;
     }
 

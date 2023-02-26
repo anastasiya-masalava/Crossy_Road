@@ -14,6 +14,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Player {
     private Context context;
     private Bitmap bitmap;
@@ -54,7 +57,16 @@ public class Player {
         final float testTextSize = 70f;
         paint.setColor(Color.WHITE);
         paint.setTextSize(testTextSize);
-        canvas.drawBitmap(bitmap, marginleft, marginup, paint);
+        int change_x = GamePage.getChange_x();
+        int change_y = GamePage.getChange_y();
+        int one_block = Game.getUnit() * Game.getOnepixel();
+
+        int new_x = marginleft + change_x * 47;
+        int new_y = marginup + change_y * 47;
+
+
+        canvas.drawBitmap(bitmap, new_x, new_y, paint);
+
         canvas.drawBitmap(bitmap2, 50, 75, paint);
         canvas.drawBitmap(bitmap3, canvas.getWidth() - 250, 55, paint);
         canvas.drawBitmap(bitmap4, canvas.getWidth() - 250, canvas.getHeight() - 230, paint);
@@ -81,6 +93,7 @@ public class Player {
         String levelText = "0";
         canvas.drawText(levelText, canvas.getWidth() - 100, 150, paint);
     }
+
 
     public void update() {
         // An example of update method
