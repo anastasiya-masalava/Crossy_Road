@@ -15,7 +15,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Player {
-
     private Context context;
     private Bitmap bitmap;
     private Bitmap bitmap2;

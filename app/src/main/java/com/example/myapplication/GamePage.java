@@ -154,6 +154,4 @@ public class GamePage extends ConfigPage {
         bm.recycle();
         return resizedBitmap;
     }
-
-
 }

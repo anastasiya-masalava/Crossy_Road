@@ -40,7 +40,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.marginleft = marginleft;
         this.marginup = marginup;
 
-
         this.player = new Player(getContext(), inBitmap, lives, player_name, bitmap2, bitmap3,
                                 bitmap4, bitmap5, bitmap6, bitmap7);
 
