@@ -74,11 +74,10 @@ public class GamePage extends ConfigPage {
         int width = displayMetrics.widthPixels;
 
         int onepixel = 3;
-        int unit = (width - onepixel*11) / 12;
-        int unitHeight = (height - onepixel*11)/25;
-        int marginleft = (int) ((int) unit * 0.5);
+        int marginleft = 5;
         int marginup = 250;
-
+        int unit = (width - onepixel*11 - marginleft*2) / 11;
+        int unitHeight = (height - onepixel*11)/25;
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableResourceId);
         Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.lifes);
