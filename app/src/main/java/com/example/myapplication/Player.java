@@ -1,11 +1,17 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.opengl.GLSurfaceView;
+import android.view.MotionEvent;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Player {
 
@@ -13,17 +19,30 @@ public class Player {
     private Bitmap bitmap;
     private Bitmap bitmap2;
     private Bitmap bitmap3;
+
+    private Bitmap bitmap4;
+
+    private Bitmap bitmap5;
+
+    private Bitmap bitmap6;
+
+    private Bitmap bitmap7;
     private int lives;
     private String name;
 
     private int posX;
     private int posY;
 
-    public Player(Context context, Bitmap bitmap, int lives, String name, Bitmap bitmap2, Bitmap bitmap3) {
+    public Player(Context context, Bitmap bitmap, int lives, String name, Bitmap bitmap2, Bitmap bitmap3,
+                  Bitmap bitmap4, Bitmap bitmap5, Bitmap bitmap6, Bitmap bitmap7) {
         this.context = context;
         this.bitmap = bitmap;
         this.bitmap2 = bitmap2;
         this.bitmap3 = bitmap3;
+        this.bitmap4 = bitmap4;
+        this.bitmap5 = bitmap5;
+        this.bitmap6 = bitmap6;
+        this.bitmap7 = bitmap7;
         this.lives = lives;
         this.name = name;
         posX = 500;
@@ -37,6 +56,10 @@ public class Player {
         canvas.drawBitmap(bitmap, marginleft, marginup, paint);
         canvas.drawBitmap(bitmap2, 50, 75, paint);
         canvas.drawBitmap(bitmap3, canvas.getWidth() - 250, 55, paint);
+        canvas.drawBitmap(bitmap4, canvas.getWidth() - 250, canvas.getHeight() - 230, paint);
+        canvas.drawBitmap(bitmap5, canvas.getWidth() - 450, canvas.getHeight() - 230, paint);
+        canvas.drawBitmap(bitmap6, canvas.getWidth() - 650, canvas.getHeight() - 230, paint);
+        canvas.drawBitmap(bitmap7, canvas.getWidth() - 850, canvas.getHeight() - 230, paint);
         drawLives(canvas, paint);
         drawName(canvas, paint);
         drawCoins(canvas, paint);

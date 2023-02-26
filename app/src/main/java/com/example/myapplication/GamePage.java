@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -82,18 +83,62 @@ public class GamePage extends ConfigPage {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableResourceId);
         Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.lifes);
         Bitmap bitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.coin);
+
+        Bitmap bitmap4 = BitmapFactory.decodeResource(getResources(), R.drawable.button_down);
+        Bitmap bitmap5 = BitmapFactory.decodeResource(getResources(), R.drawable.button_up);
+        Bitmap bitmap6 = BitmapFactory.decodeResource(getResources(), R.drawable.button_right);
+        Bitmap bitmap7 = BitmapFactory.decodeResource(getResources(), R.drawable.button_left);
         //size of player will be 1.3 unit x 1.3 unit
         bitmap = getResizedBitmap(bitmap, (int) ((int) unit*1.3), (int) ((int) unit*1.3));
         bitmap2 = getResizedBitmap(bitmap2, 100, 100);
         bitmap3 = getResizedBitmap(bitmap3, 150, 150);
+        bitmap4 = getResizedBitmap(bitmap4, 150, 150);
+        bitmap5 = getResizedBitmap(bitmap5, 150, 150);
+        bitmap6 = getResizedBitmap(bitmap6, 150, 150);
+        bitmap7 = getResizedBitmap(bitmap7, 150, 150);
+
 
 
 //        System.out.println(width + " " + height);
 
-        Game new_game = new Game(this, playerName, bitmap, lives, bitmap2, bitmap3, width, height, unit, onepixel, unitHeight, marginleft, marginup);
+        Game new_game = new Game(this, playerName, bitmap, lives, bitmap2, bitmap3, bitmap4,
+                bitmap5, bitmap6, bitmap7, width, height, unit, onepixel, unitHeight, marginleft, marginup);
         setContentView(new_game);
 
 
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float x = event.getX();
+        float y = event.getY();
+
+        int buttonSize = 75;
+
+        int btn1x = 905;
+        int btn2x = 705;
+        int btn3x = 505;
+        int btn4x = 305;
+        int btny = 1660;
+
+        if (x >= btn1x - buttonSize && x <= btn1x + buttonSize
+            && y >= btny - buttonSize && y <= btny + buttonSize) {
+            System.out.println("Button 1 pressed");
+        }
+        else if (x >= btn2x - buttonSize && x <= btn2x + buttonSize
+                && y >= btny - buttonSize && y <= btny + buttonSize) {
+            System.out.println("Button 2 pressed");
+        }
+        else if (x >= btn3x - buttonSize && x <= btn3x + buttonSize
+                && y >= btny - buttonSize && y <= btny + buttonSize) {
+            System.out.println("Button 3 pressed");
+        }
+        else if (x >= btn4x - buttonSize && x <= btn4x + buttonSize
+                && y >= btny - buttonSize && y <= btny + buttonSize) {
+            System.out.println("Button 4 pressed");
+        }
+
+        return true;
     }
 
     public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
