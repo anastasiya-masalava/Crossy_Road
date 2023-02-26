@@ -8,8 +8,10 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 
@@ -23,7 +25,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private int marginleft;
     private int marginup;
 //    private final Mapp map;
-    public Game(Context context, String player_name, Bitmap inBitmap, int lives, Bitmap bitmap2, Bitmap bitmap3, int width, int height, int unit, int onepixel, int unitHeight, int marginleft, int marginup) {
+    public Game(Context context, String player_name, Bitmap inBitmap, int lives, Bitmap bitmap2, Bitmap bitmap3, Bitmap bitmap4, Bitmap bitmap5, Bitmap bitmap6, Bitmap bitmap7, int width, int height, int unit, int onepixel, int unitHeight, int marginleft, int marginup) {
         super(context);
 
         //Gets the surface holder and adds callback to game
@@ -38,7 +40,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.marginleft = marginleft;
         this.marginup = marginup;
 
-        this.player = new Player(getContext(), inBitmap, lives, player_name, bitmap2, bitmap3);
+        this.player = new Player(getContext(), inBitmap, lives, player_name, bitmap2, bitmap3,
+                                bitmap4, bitmap5, bitmap6, bitmap7);
 
         this.setFocusable(true);
     }
@@ -61,7 +64,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void draw(Canvas canvas) {
         super.draw(canvas);
 
-        canvas.drawColor(Color.GRAY);
+        canvas.drawRGB(41, 41, 41);
 
         drawMap(canvas);
         player.draw(canvas, (int) (marginleft + (unit+onepixel)*5 - unit*0.15), (int) (marginup + (unitHeight+onepixel)*14 + ( - 1.3*unit + unitHeight)), unit);
