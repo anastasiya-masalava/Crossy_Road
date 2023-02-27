@@ -41,6 +41,50 @@ public class Player {
         posY = 500;
     }
 
+    public int getLives() {
+        return lives;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+
+    public void loseLife() {
+        this.lives = this.lives - 1;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
     public void draw(Canvas canvas, int marginleft, int marginup, int unit) {
         Paint paint = new Paint();
         final float testTextSize = 70f;
