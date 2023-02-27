@@ -129,6 +129,10 @@ public class GamePage extends ConfigPage {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() != MotionEvent.ACTION_DOWN) {
+            return true;
+        }
+
         float x = event.getX();
         float y = event.getY();
 
