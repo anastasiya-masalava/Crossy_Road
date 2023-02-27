@@ -104,8 +104,6 @@ public class GamePage extends ConfigPage {
         Game new_game = new Game(this, playerName, bitmap, lives, bitmap2, bitmap3, bitmap4,
                 bitmap5, bitmap6, bitmap7, width, height, unit, onepixel, unitHeight, marginleft, marginup);
         setContentView(new_game);
-
-
     }
 
     @Override

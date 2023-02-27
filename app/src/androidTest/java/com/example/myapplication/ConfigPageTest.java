@@ -2,22 +2,30 @@ package com.example.myapplication;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-public class ConfigPageTest {
-
+public class ConfigPageTest
+{
+    @Mock
     private ConfigPage configPage;
+    private AutoCloseable autoClosable;
 
+    @Before
+    public void setUp(){
+        MockitoAnnotations.initMocks(this);
+    }
     @Test
     public void setAlertTextView() {
     }
 
     @Test
     public void isLevelSelectedTest() {
-        configPage = new ConfigPage();
         Boolean input = true;
         configPage.setIsLevelSelected(input);
         Boolean output = configPage.getIsLevelSelected();
@@ -27,7 +35,6 @@ public class ConfigPageTest {
 
     @Test
     public void difficultyLevelTest() {
-        configPage = new ConfigPage();
         String input = "Easy";
         configPage.setDifficultyLevel(input);
         String output = configPage.getDifficultyLevel();
@@ -37,7 +44,6 @@ public class ConfigPageTest {
 
     @Test
     public void isSpriteSelectedTest() {
-        configPage = new ConfigPage();
         Boolean input = true;
         configPage.setIsSpriteSelected(input);
         Boolean output = configPage.getIsSpriteSelected();
@@ -47,7 +53,6 @@ public class ConfigPageTest {
 
     @Test
     public void spriteSelectedTest() {
-        configPage = new ConfigPage();
         String input = "Dog";
         configPage.setSpriteSelected(input);
         String output = configPage.getSpriteSelected();
@@ -57,7 +62,6 @@ public class ConfigPageTest {
 
     @Test
     public void enteredNameTest() {
-        configPage = new ConfigPage();
         String input = "Brandi";
         configPage.setEnteredName(input);
         String output = configPage.getEnteredName();
