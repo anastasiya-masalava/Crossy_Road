@@ -1,21 +1,11 @@
 package com.example.myapplication;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.opengl.GLSurfaceView;
-import android.view.MotionEvent;
-import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class Player {
     private Context context;
@@ -36,16 +26,15 @@ public class Player {
     private int posX;
     private int posY;
 
-    public Player(Context context, Bitmap bitmap, int lives, String name, Bitmap bitmap2, Bitmap bitmap3,
-                  Bitmap bitmap4, Bitmap bitmap5, Bitmap bitmap6, Bitmap bitmap7) {
+    public Player(Context context, Bitmap bitmap, int lives, String name, Bitmap[] bitmaps) {
         this.context = context;
         this.bitmap = bitmap;
-        this.bitmap2 = bitmap2;
-        this.bitmap3 = bitmap3;
-        this.bitmap4 = bitmap4;
-        this.bitmap5 = bitmap5;
-        this.bitmap6 = bitmap6;
-        this.bitmap7 = bitmap7;
+        this.bitmap2 = bitmaps[0];
+        this.bitmap3 = bitmaps[1];
+        this.bitmap4 = bitmaps[2];
+        this.bitmap5 = bitmaps[3];
+        this.bitmap6 = bitmaps[4];
+        this.bitmap7 = bitmaps[5];
         this.lives = lives;
         this.name = name;
         posX = 500;
@@ -57,32 +46,31 @@ public class Player {
         final float testTextSize = 70f;
         paint.setColor(Color.WHITE);
         paint.setTextSize(testTextSize);
-        int change_x = GamePage.getChange_x();
-        int change_y = GamePage.getChange_y();
-        int one_block = Game.getUnit() * Game.getOnepixel();
-        if (change_x == 0 && change_y == 0) {
+        int changeX = GamePage.getChangeX();
+        int changeY = GamePage.getChangeY();
+        if (changeX == 0 && changeY == 0) {
             this.posY = marginup;
             this.posX = marginleft;
         }
-        int new_x = marginleft + change_x * 49;
-        int new_y = marginup + change_y * 49;
+        int newX = marginleft + changeX * 49;
+        int newY = marginup + changeY * 49;
 
-        if (new_x >= 0 && new_x < 950 && new_y > 200 && new_y < 1270) {
-            canvas.drawBitmap(bitmap, new_x, new_y, paint);
-            this.posX = new_x;
-            this.posY = new_y;
+        if (newX >= 0 && newX < 950 && newY > 200 && newY < 1270) {
+            canvas.drawBitmap(bitmap, newX, newY, paint);
+            this.posX = newX;
+            this.posY = newY;
         } else {
-            if (new_x < 0) {
-                GamePage.setChange_x(change_x + 1);
+            if (newX < 0) {
+                GamePage.setChangeX(changeX + 1);
             }
-            if (new_x >= 950) {
-                GamePage.setChange_x(change_x - 1);
+            if (newX >= 950) {
+                GamePage.setChangeX(changeX - 1);
             }
-            if (new_y <= 200) {
-                GamePage.setChange_y(change_y + 1);
+            if (newY <= 200) {
+                GamePage.getChangeY(changeY + 1);
             }
-            if (new_y >= 1270) {
-                GamePage.setChange_y(change_y - 1);
+            if (newY >= 1270) {
+                GamePage.getChangeY(changeY - 1);
             }
             canvas.drawBitmap(bitmap, this.posX, this.posY, paint);
         }
@@ -116,13 +104,6 @@ public class Player {
 
 
     public void update() {
-        // An example of update method
-        // It will actually take input from the controller
-        // to tell it to move left, right, up, or down
-//        String command = "left";
-//        if (command.equals("left")) {
-//            this.posX = this.posX - 20;
-//        }
-        ;
+
     }
 }
