@@ -64,15 +64,15 @@ public class Player {
             this.posY = marginup;
             this.posX = marginleft;
         }
-        int new_x = marginleft + change_x * 24;
-        int new_y = marginup + change_y * 24;
+        int new_x = marginleft + change_x * 49;
+        int new_y = marginup + change_y * 49;
 
-        if (new_x > 5 && new_x < 950 && new_y > 200 && new_y < 1270) {
+        if (new_x >= 0 && new_x < 950 && new_y > 200 && new_y < 1270) {
             canvas.drawBitmap(bitmap, new_x, new_y, paint);
             this.posX = new_x;
             this.posY = new_y;
         } else {
-            if (new_x <= 5) {
+            if (new_x < 0) {
                 GamePage.setChange_x(change_x + 1);
             }
             if (new_x >= 950) {
