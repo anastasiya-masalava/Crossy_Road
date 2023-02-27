@@ -14,6 +14,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Player {
     private Context context;
     private Bitmap bitmap;
@@ -54,7 +57,36 @@ public class Player {
         final float testTextSize = 70f;
         paint.setColor(Color.WHITE);
         paint.setTextSize(testTextSize);
-        canvas.drawBitmap(bitmap, marginleft, marginup, paint);
+        int change_x = GamePage.getChange_x();
+        int change_y = GamePage.getChange_y();
+        int one_block = Game.getUnit() * Game.getOnepixel();
+        if (change_x == 0 && change_y == 0) {
+            this.posY = marginup;
+            this.posX = marginleft;
+        }
+        int new_x = marginleft + change_x * 24;
+        int new_y = marginup + change_y * 24;
+
+        if (new_x > 5 && new_x < 950 && new_y > 200 && new_y < 1270) {
+            canvas.drawBitmap(bitmap, new_x, new_y, paint);
+            this.posX = new_x;
+            this.posY = new_y;
+        } else {
+            if (new_x <= 5) {
+                GamePage.setChange_x(change_x + 1);
+            }
+            if (new_x >= 950) {
+                GamePage.setChange_x(change_x - 1);
+            }
+            if (new_y <= 200) {
+                GamePage.setChange_y(change_y + 1);
+            }
+            if (new_y >= 1270) {
+                GamePage.setChange_y(change_y - 1);
+            }
+            canvas.drawBitmap(bitmap, this.posX, this.posY, paint);
+        }
+
         canvas.drawBitmap(bitmap2, 50, 75, paint);
         canvas.drawBitmap(bitmap3, canvas.getWidth() - 250, 55, paint);
         canvas.drawBitmap(bitmap4, canvas.getWidth() - 250, canvas.getHeight() - 230, paint);
@@ -81,6 +113,7 @@ public class Player {
         String levelText = "0";
         canvas.drawText(levelText, canvas.getWidth() - 100, 150, paint);
     }
+
 
     public void update() {
         // An example of update method

@@ -19,9 +19,23 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameLoop gameLoop;
     private final Player player;
-    private int onepixel;
-    private int unit;
-    private int unitHeight;
+
+    public static int getOnepixel() {
+        return onepixel;
+    }
+
+    private static int onepixel;
+
+    public static int getUnit() {
+        return unit;
+    }
+
+    public static int getUnitHeight() {
+        return unitHeight;
+    }
+
+    private static int unit;
+    private static int unitHeight;
     private int marginleft;
     private int marginup;
 //    private final Mapp map;
@@ -72,11 +86,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void drawMap(Canvas canvas){
 
-
-//        int drawRIdRiver = R.drawable.river;
-////                this.getResources().getIdentifier("bunny", "drawable", this.getPackageName());
-//        int drawRIdRoad = R.drawable.road;
-//        int drawRIdStart = R.drawable.start;
         Bitmap bitmapRiver = getResizedBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.river), unit, unitHeight);
         Bitmap bitmapRoad = getResizedBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.road), unit, unitHeight);
         Bitmap bitmapStart = getResizedBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.start), unit, unitHeight);
