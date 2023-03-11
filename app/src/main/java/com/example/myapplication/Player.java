@@ -100,8 +100,8 @@ public class Player {
         int changeX = GamePage.getChangeX();
         int changeY = GamePage.getChangeY();
         // remember previous position
-        int prev_x = this.posX;
-        int prev_y = this.posY;
+        int prevX = this.posX;
+        int prevY = this.posY;
         if (changeX == 0 && changeY == 0) {
             this.posY = marginup;
             this.posX = marginleft;
@@ -129,12 +129,12 @@ public class Player {
             canvas.drawBitmap(bitmap, this.posX, this.posY, paint);
         }
         // check if we moved up and were on the same height before
-        if (prev_x == this.posX && prev_y > this.posY) {
+        if (prevX == this.posX && prevY > this.posY) {
             if (!positions.contains(posY)) {
                 // if tile is safe or goal -> add one
                 // if tile is river -> add 2
                 // if tile is road -> add 3
-                update_score();
+                updateScore();
                 positions.add(posY);
             }
         }
@@ -151,14 +151,14 @@ public class Player {
         drawCoins(canvas, paint);
     }
 
-    private void update_score() {
-        if (this.posY+bitmap.getHeight() >= Game.getEnd_start_tile()) {
+    private void updateScore() {
+        if (this.posY + bitmap.getHeight() >= Game.getEndStartTile()) {
             score++; // start tiles
-        } else if (this.posY+bitmap.getHeight() >= Game.getEnd_road_tile()) {
+        } else if (this.posY + bitmap.getHeight() >= Game.getEndRoadTile()) {
             score += 3; // road tiles
-        } else if (this.posY+bitmap.getHeight() >= Game.getEnd_safe_tile()) {
+        } else if (this.posY + bitmap.getHeight() >= Game.getEndSafeTile()) {
             score++; // safe tiles
-        } else if (this.posY+bitmap.getHeight() >= Game.getEnd_river_tile()) {
+        } else if (this.posY + bitmap.getHeight() >= Game.getEndRiverTile()) {
             score += 2; // river tiles
         } else {
             score++; // goal tiles
