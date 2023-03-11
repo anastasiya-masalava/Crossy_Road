@@ -28,6 +28,12 @@ public class GamePage extends ConfigPage {
     private static int changeX = 0;
     private static int changeY = 0;
 
+    public static int getScore() {
+        return score;
+    }
+
+    private static int score = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,6 +146,7 @@ public class GamePage extends ConfigPage {
         }
         return true;
     }
+
 
     public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
         int width = bm.getWidth();
