@@ -10,9 +10,8 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4Builder;
 import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.After;
+
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -26,11 +25,10 @@ public class ConfigPageTest
 {
 //    @Mock
     @Mock
-Context mApplicationContext;
+    Context mApplicationContext;
     private ConfigPage configPage;
 //    private AutoCloseable autoClosable;
 
-    @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         configPage = new ConfigPage();

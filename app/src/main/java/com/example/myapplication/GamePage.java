@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import static java.lang.Integer.parseInt;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,47 +7,32 @@ import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class GamePage extends ConfigPage {
-    public static int getChange_x() {
-        return change_x;
+    public static int getChangeX() {
+        return changeX;
     }
 
-    public static int getChange_y() {
-        return change_y;
+    public static int getChangeY() {
+        return changeY;
     }
 
-    public static void setChange_x(int change_x) {
-        GamePage.change_x = change_x;
+    public static void setChangeX(int changeX) {
+        GamePage.changeX = changeX;
     }
 
-    public static void setChange_y(int change_y) {
-        GamePage.change_y = change_y;
+    public static void getChangeY(int changeY) {
+        GamePage.changeY = changeY;
     }
 
-    private static int change_x = 0;
-    private static int change_y = 0;
-    GridView simpleGrid;
-    int logos[] = {
-            R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass,
-            R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass, R.drawable.grass,
-            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
-            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
-            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
-            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
-            R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river,
-            R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river,
-            R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river,
-            R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river, R.drawable.river,
-            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
-            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
-            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
-            R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road, R.drawable.road,
-            R.drawable.start, R.drawable.start, R.drawable.start, R.drawable.start, R.drawable.start, R.drawable.start,
-            R.drawable.start, R.drawable.start, R.drawable.start, R.drawable.start, R.drawable.start,};
+    private static int changeX = 0;
+    private static int changeY = 0;
+
+    public static int getScore() {
+        return score;
+    }
+
+    private static int score = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +43,7 @@ public class GamePage extends ConfigPage {
         String playerName = extras.getString("player_name");
         System.out.println("Player:" + playerName);
         String difficulty = extras.getString("difficulty");
-        ;
+
         System.out.println("Difficulty:" + difficulty);
         int lives;
         if (difficulty.equals("Easy")) {
@@ -117,12 +100,11 @@ public class GamePage extends ConfigPage {
         bitmap6 = getResizedBitmap(bitmap6, 150, 150);
         bitmap7 = getResizedBitmap(bitmap7, 150, 150);
 
-
-//        System.out.println(width + " " + height);
-
-        Game new_game = new Game(this, playerName, bitmap, lives, bitmap2, bitmap3, bitmap4,
-                bitmap5, bitmap6, bitmap7, width, height, unit, onepixel, unitHeight, marginleft, marginup);
-        setContentView(new_game);
+        Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
+        int[] units = new int[]{unit, onepixel, unitHeight};
+        int[] margins = new int[]{marginleft, marginup};
+        Game newGame = new Game(this, playerName, bitmap, lives, bitmaps, units, margins);
+        setContentView(newGame);
     }
 
     @Override
@@ -144,23 +126,24 @@ public class GamePage extends ConfigPage {
 
         if (x >= btn1x - buttonSize && x <= btn1x + buttonSize
                 && y >= btny - buttonSize && y <= btny + buttonSize) {
-            System.out.println("Button 1 pressed");//down
-            change_y += 1;
+            System.out.println("Button 1 pressed"); //down
+            changeY += 1;
         } else if (x >= btn2x - buttonSize && x <= btn2x + buttonSize
                 && y >= btny - buttonSize && y <= btny + buttonSize) {
             System.out.println("Button 2 pressed");
-            change_y -= 1;
+            changeY -= 1;
         } else if (x >= btn3x - buttonSize && x <= btn3x + buttonSize
                 && y >= btny - buttonSize && y <= btny + buttonSize) {
             System.out.println("Button 3 pressed");
-            change_x += 1;
+            changeX += 1;
         } else if (x >= btn4x - buttonSize && x <= btn4x + buttonSize
                 && y >= btny - buttonSize && y <= btny + buttonSize) {
             System.out.println("Button 4 pressed");
-            change_x -= 1;
+            changeX -= 1;
         }
         return true;
     }
+
 
     public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
         int width = bm.getWidth();

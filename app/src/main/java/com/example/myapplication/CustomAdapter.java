@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 public class CustomAdapter extends BaseAdapter {
-    Context context;
-    int logos[];
-    LayoutInflater inflter;
+    private Context context;
+    private int[] logos;
+    private LayoutInflater inflter;
     public CustomAdapter(Context applicationContext, int[] logos) {
         this.context = applicationContext;
         this.logos = logos;

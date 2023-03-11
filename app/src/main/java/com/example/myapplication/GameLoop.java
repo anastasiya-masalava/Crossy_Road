@@ -5,7 +5,7 @@ import android.view.SurfaceHolder;
 
 import java.util.Arrays;
 
-public class GameLoop extends Thread{
+public class GameLoop extends Thread {
     private Game game;
     private final SurfaceHolder surfaceHolder;
 
@@ -15,6 +15,7 @@ public class GameLoop extends Thread{
 
     private static final double MAX_UPS = 30.0;
     private static final double UPS_PERIOD = 1000 / MAX_UPS;
+
     public GameLoop(Game game, SurfaceHolder surfaceHolder) {
         this.game = game;
         this.surfaceHolder = surfaceHolder;
@@ -38,6 +39,7 @@ public class GameLoop extends Thread{
     public static double getMaxUPS() {
         return MAX_UPS;
     }
+
     @Override
     public void run() {
         super.run();
@@ -46,7 +48,9 @@ public class GameLoop extends Thread{
         int updatesCounter = 0;
         int framesCounter = 0;
 
-        long startTime, elapsedTime, sleepTime;
+        long startTime;
+        long elapsedTime;
+        long sleepTime;
 
         Canvas canvas = null;
 
@@ -55,7 +59,7 @@ public class GameLoop extends Thread{
         // Height: 1648
         // Width: 1080
 
-        while(isRunning) {
+        while (isRunning) {
             try {
                 canvas = surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
