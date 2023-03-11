@@ -6,6 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 public class Player {
     private Context context;
@@ -25,6 +28,10 @@ public class Player {
 
     private int posX;
     private int posY;
+    private int score = 0;
+
+
+    private static Set<Object> positions = new HashSet<>(); // hashset with posY values
 
     public Player(Context context, Bitmap bitmap, int lives, String name, Bitmap[] bitmaps) {
         this.context = context;
@@ -92,6 +99,9 @@ public class Player {
         paint.setTextSize(testTextSize);
         int changeX = GamePage.getChangeX();
         int changeY = GamePage.getChangeY();
+        // remember previous position
+        int prevX = this.posX;
+        int prevY = this.posY;
         if (changeX == 0 && changeY == 0) {
             this.posY = marginup;
             this.posX = marginleft;
@@ -118,6 +128,17 @@ public class Player {
             }
             canvas.drawBitmap(bitmap, this.posX, this.posY, paint);
         }
+        // check if we moved up and were on the same height before
+        if (prevX == this.posX && prevY > this.posY) {
+            if (!positions.contains(posY)) {
+                // if tile is safe or goal -> add one
+                // if tile is river -> add 2
+                // if tile is road -> add 3
+                updateScore();
+                positions.add(posY);
+            }
+        }
+
 
         canvas.drawBitmap(bitmap2, 50, 75, paint);
         canvas.drawBitmap(bitmap3, canvas.getWidth() - 250, 55, paint);
@@ -128,6 +149,20 @@ public class Player {
         drawLives(canvas, paint);
         drawName(canvas, paint);
         drawCoins(canvas, paint);
+    }
+
+    private void updateScore() {
+        if (this.posY + bitmap.getHeight() >= Game.getEndStartTile()) {
+            score++; // start tiles
+        } else if (this.posY + bitmap.getHeight() >= Game.getEndRoadTile()) {
+            score += 3; // road tiles
+        } else if (this.posY + bitmap.getHeight() >= Game.getEndSafeTile()) {
+            score++; // safe tiles
+        } else if (this.posY + bitmap.getHeight() >= Game.getEndRiverTile()) {
+            score += 2; // river tiles
+        } else {
+            score++; // goal tiles
+        }
     }
 
     private void drawLives(Canvas canvas, Paint paint) {
@@ -142,8 +177,8 @@ public class Player {
     }
 
     private void drawCoins(Canvas canvas, Paint paint) {
-        String levelText = "0";
-        canvas.drawText(levelText, canvas.getWidth() - 100, 150, paint);
+        String levelText = Integer.toString(score);
+        canvas.drawText(levelText, canvas.getWidth() - 90, 150, paint);
     }
 
 

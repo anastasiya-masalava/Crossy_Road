@@ -36,11 +36,34 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private static int unitHeight;
     private int marginleft;
     private int marginup;
+
     private ArrayList<Moveable> movingObjects;
     private Context context;
 
     private int updatesCount;   // Integer to keep track of how many updates there have been
     private int SCREEN_WIDTH;
+
+
+    private static int endRiverTile;
+    private static int endSafeTile;
+    private static int endRoadTile;
+    private static int endStartTile;
+
+    public static int getEndRiverTile() {
+        return endRiverTile;
+    }
+
+    public static int getEndSafeTile() {
+        return endSafeTile;
+    }
+
+    public static int getEndRoadTile() {
+        return endRoadTile;
+    }
+
+    public static int getEndStartTile() {
+        return endStartTile;
+    }
 
 
     //    private final Map map;
@@ -151,27 +174,28 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         Paint paint = new Paint();
         drawLine(canvas, 0, paint, unitHeight, marginleft, marginup, bitmapGrass);
         drawLine(canvas, 1, paint, unitHeight, marginleft, marginup, bitmapGrass);
-        drawLine(canvas, 2, paint, unitHeight, marginleft, marginup, bitmapRiver);
+        endRiverTile = drawLine(canvas, 2, paint, unitHeight, marginleft, marginup, bitmapRiver);
         drawLine(canvas, 3, paint, unitHeight, marginleft, marginup, bitmapRiver);
         drawLine(canvas, 4, paint, unitHeight, marginleft, marginup, bitmapRiver);
         drawLine(canvas, 5, paint, unitHeight, marginleft, marginup, bitmapRiver);
-        drawLine(canvas, 6, paint, unitHeight, marginleft, marginup, bitmapStart);
-        drawLine(canvas, 7, paint, unitHeight, marginleft, marginup, bitmapRoad);
+        endSafeTile = drawLine(canvas, 6, paint, unitHeight, marginleft, marginup, bitmapStart);
+        endRoadTile = drawLine(canvas, 7, paint, unitHeight, marginleft, marginup, bitmapRoad);
         drawLine(canvas, 8, paint, unitHeight, marginleft, marginup, bitmapRoad);
         drawLine(canvas, 9, paint, unitHeight, marginleft, marginup, bitmapRoad);
         drawLine(canvas, 10, paint, unitHeight, marginleft, marginup, bitmapRoad);
         drawLine(canvas, 11, paint, unitHeight, marginleft, marginup, bitmapRoad);
         drawLine(canvas, 12, paint, unitHeight, marginleft, marginup, bitmapRoad);
         drawLine(canvas, 13, paint, unitHeight, marginleft, marginup, bitmapRoad);
-        drawLine(canvas, 14, paint, unitHeight, marginleft, marginup, bitmapStart);
+        endStartTile = drawLine(canvas, 14, paint, unitHeight, marginleft, marginup, bitmapStart);
     }
 
-    public void drawLine(Canvas canvas, int row, Paint paint, int unitHeight,
-                         int marginleft, int marginup, Bitmap bitmap) {
+    public int drawLine(Canvas canvas, int row, Paint paint, int unitHeight,
+                        int marginleft, int marginup, Bitmap bitmap) {
         for (int i = 0; i < 11; i++) {
             canvas.drawBitmap(bitmap, marginleft + i * unit + (i) * onepixel,
                     marginup + row * (unitHeight + onepixel), paint);
         }
+        return marginup + row * (unitHeight + onepixel); // return hight where we start drawing
     }
 
     // Method that gives you the Y coordinate for the nth row.
