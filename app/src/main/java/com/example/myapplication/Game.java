@@ -11,6 +11,8 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
+
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameLoop gameLoop;
@@ -34,8 +36,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private static int unitHeight;
     private int marginleft;
     private int marginup;
+    private ArrayList<Moveable> movingObjects;
+    private Context context;
 
-    //    private final Mapp map;
+    private int updatesCount;   // Integer to keep track of how many updates there have been
+    private int SCREEN_WIDTH;
+
+
+    //    private final Map map;
     public Game(Context context, String playerName, Bitmap inBitmap, int lives,
                 Bitmap[] bitmaps, int[] units, int[] margins) {
         super(context);
@@ -52,6 +60,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.marginleft = margins[0];
         this.marginup = margins[1];
         this.player = new Player(getContext(), inBitmap, lives, playerName, bitmaps);
+        this.movingObjects = new ArrayList<>();
+        this.updatesCount = 0;
+        this.context = context;
+        this.SCREEN_WIDTH = context.getApplicationContext().getResources().getDisplayMetrics().widthPixels;
+
+        // Add initial moving objects
+        addMoveable(new Car(context, getRowNCoordinateY(8)));
+        addMoveable(new Rocket(context, getRowNCoordinateY(10)));
+        addMoveable(new Truck(context, getRowNCoordinateY(12)));
 
         this.setFocusable(true);
     }
@@ -79,7 +96,43 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         drawMap(canvas);
         player.draw(canvas, (int) (marginleft + (unit + onepixel) * 5 - unit * 0.15),
                 (int) (marginup + (unitHeight + onepixel) * 14 + (-1.3 * unit + unitHeight)), unit);
+        drawMoveables(canvas);
+    }
 
+    private void drawMoveables(Canvas canvas) {
+        for (int i = 0; i < this.movingObjects.size(); i++) {
+            Moveable currentMovingObject = this.movingObjects.get(i);
+            currentMovingObject.draw(canvas);
+        }
+    }
+
+    private void updateMoveables() {
+        // We will add a new moving object every x updates.
+        // A new Car will be added every 200 updates
+        if (updatesCount % 200 == 0) {
+            Car newCar = new Car(this.context, getRowNCoordinateY(8));
+            addMoveable(newCar);
+        }
+        // A new Truck will be added every 300 updates
+        if (updatesCount % 300 == 0) {
+            Truck newTruck = new Truck(this.context, getRowNCoordinateY(12));
+            addMoveable(newTruck);
+        }
+        // A new rocket will be added every 150 updates
+        if (updatesCount % 150 == 0) {
+            Rocket newRocket = new Rocket(this.context, getRowNCoordinateY(10));
+            addMoveable(newRocket);
+        }
+
+        for (int i = 0; i < this.movingObjects.size(); i++) {
+            Moveable currentMovingObject = this.movingObjects.get(i);
+            currentMovingObject.update();
+            int currentPosX = currentMovingObject.getPosX();
+            // Check if object is going off the screen. If so, remove the object from the game
+            if (currentPosX > SCREEN_WIDTH || currentPosX < 0) {
+                removeMoveable(currentMovingObject);
+            }
+        }
     }
 
     public void drawMap(Canvas canvas) {
@@ -121,8 +174,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
+    // Method that gives you the Y coordinate for the nth row.
+    public int getRowNCoordinateY(int n) {
+        return marginup + n * (unitHeight + onepixel);
+    }
+
     public void update() {
+        this.updatesCount++;
         player.update();
+        updateMoveables();
     }
 
     public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
@@ -136,5 +196,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         Bitmap resizedBitmap = Bitmap.createBitmap(
                 bm, 0, 0, width, height, matrix, false);
         return resizedBitmap;
+    }
+
+    public void addMoveable(Moveable newMovingObject) {
+        this.movingObjects.add(newMovingObject);
+    }
+
+    public void removeMoveable(Moveable movingObjectToRemove) {
+        this.movingObjects.remove(movingObjectToRemove);
     }
 }
