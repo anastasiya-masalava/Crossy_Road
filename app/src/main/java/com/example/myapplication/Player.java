@@ -31,7 +31,7 @@ public class Player {
     private int score = 0;
 
 
-    private static Set<Object> positions = new HashSet<>(); // hashset with posY values
+    private Set<Object> positions = new HashSet<>(); // hashset with posY values
 
     public Player(Context context, Bitmap bitmap, int lives, String name, Bitmap[] bitmaps) {
         this.context = context;
@@ -132,16 +132,7 @@ public class Player {
             }
             canvas.drawBitmap(bitmap, this.posX, this.posY, paint);
         }
-        // check if we moved up and were on the same height before
-        if (prevX == this.posX && prevY > this.posY) {
-            if (!positions.contains(posY)) {
-                // if tile is safe or goal -> add one
-                // if tile is river -> add 2
-                // if tile is road -> add 3
-                updateScore();
-                positions.add(posY);
-            }
-        }
+        updateScore(prevX, prevY);
 
 
         canvas.drawBitmap(bitmap2, 50, 75, paint);
@@ -155,17 +146,26 @@ public class Player {
         drawCoins(canvas, paint);
     }
 
-    private void updateScore() {
-        if (this.posY + bitmap.getHeight() >= Game.getEndStartTile()) {
-            score++; // start tiles
-        } else if (this.posY + bitmap.getHeight() >= Game.getEndRoadTile()) {
-            score += 3; // road tiles
-        } else if (this.posY + bitmap.getHeight() >= Game.getEndSafeTile()) {
-            score++; // safe tiles
-        } else if (this.posY + bitmap.getHeight() >= Game.getEndRiverTile()) {
-            score += 2; // river tiles
-        } else {
-            score++; // goal tiles
+    public void updateScore(int prevX, int prevY) {
+        // check if we moved up and were on the same height before
+        if (prevX == this.posX && prevY > this.posY) {
+            if (!positions.contains(posY)) {
+                // if tile is safe or goal -> add one
+                // if tile is river -> add 2
+                // if tile is road -> add 3
+                if (this.posY + bitmap.getHeight() >= Game.getEndStartTile()) {
+                    score++; // start tiles
+                } else if (this.posY + bitmap.getHeight() >= Game.getEndRoadTile()) {
+                    score += 3; // road tiles
+                } else if (this.posY + bitmap.getHeight() >= Game.getEndSafeTile()) {
+                    score++; // safe tiles
+                } else if (this.posY + bitmap.getHeight() >= Game.getEndRiverTile()) {
+                    score += 2; // river tiles
+                } else {
+                    score++; // goal tiles
+                };
+                positions.add(posY);
+            }
         }
     }
 

@@ -10,11 +10,11 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 @RunWith(AndroidJUnit4.class)
 public class Sprint3Tests {
@@ -67,18 +67,78 @@ public class Sprint3Tests {
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
         player = new Player(appContext, bitmap, 5, "test player", bitmaps);
     }
-    
+
+    @Test
+    public void testMultipleObjectHeights() {
+        createNewGame();
+        HashSet<Integer> heights = new HashSet<Integer>();
+        for (int i = 0; i < 10000; i++) {
+            game.update();
+            for (Moveable m : game.getMoveables()) {
+                heights.add(m.getPosY());
+            }
+        }
+        Assert.assertTrue(heights.size() > 2);
+    }
+    @Test
+    public void multipleDirectionsObjectMovement() {
+        createNewGame();
+        boolean leftBoundary = false;
+        boolean rightBoundary = false;
+        for (int i = 0; i < 10000; i++) {
+            game.update();
+            for (Moveable m : game.getMoveables()) {
+                if (m.getPosX() > 0 && m.getPosX() < 10) {
+                    leftBoundary = true;
+                } else if (m.getPosX() > 890 && m.getPosX() < 900) {
+                    rightBoundary = true;
+                }
+            }
+        }
+        Assert.assertTrue(leftBoundary);
+        Assert.assertTrue(rightBoundary);
+    }
+
+    @Test
+    public void verticalScoreDuplicateUpdate() {
+        createNewPlayer();
+        int posX = player.getPosX();
+        int posY = player.getPosY();
+        int oldScore = player.getScore();
+        player.setPosY(posY - 250);
+        player.updateScore(posX, posY);
+        player.setPosY(posY);
+        player.updateScore(posX, posY - 250);
+        player.setPosY(posY - 250);
+        player.updateScore(posX, posY);
+        int newScore = player.getScore();
+        Assert.assertEquals(oldScore + 1, newScore);
+    }
+
+    @Test
+    public void verticalScoreUpdate() {
+        createNewPlayer();
+        int posX = player.getPosX();
+        int posY = player.getPosY();
+        int oldScore = player.getScore();
+        player.setPosY(posY - 250);
+        player.updateScore(posX, posY);
+        int newScore = player.getScore();
+        Assert.assertEquals(oldScore + 1, newScore);
+    }
+
     @Test
     public void noHorizontalScoreUpdate() {
         createNewPlayer();
         int posX = player.getPosX();
+        int posY = player.getPosY();
         int oldScore = player.getScore();
         player.setPosX(posX + 1);
-        player.setPosX(posX + 2);
-        player.setPosX(posX + 3);
-        player.setPosX(posX + 4);
-        player.setPosX(posX + 3);
-        player.setPosX(posX + 2);
+        player.updateScore(posX, posY);
+        player.setPosX(posX);
+        player.updateScore(posX + 1, posY);
+        player.setPosX(posX - 1);
+        player.updateScore(posX, posY);
         int newScore = player.getScore();
         Assert.assertEquals(oldScore, newScore);
     }

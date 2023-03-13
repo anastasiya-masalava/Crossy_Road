@@ -37,6 +37,7 @@ public class MovingObject implements Moveable {
         return this.posX;
     }
 
+    @Override
     public int getPosY() {
         return this.posY;
     }
