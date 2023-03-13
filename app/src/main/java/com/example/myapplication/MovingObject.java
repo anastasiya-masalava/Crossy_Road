@@ -36,4 +36,12 @@ public class MovingObject implements Moveable {
     public int getPosX() {
         return this.posX;
     }
+
+    public int getPosY() {
+        return this.posY;
+    }
+
+    public int getSpeed() {
+        return this.speed;
+    }
 }

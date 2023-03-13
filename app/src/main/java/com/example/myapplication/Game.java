@@ -122,6 +122,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         drawMoveables(canvas);
     }
 
+    public ArrayList<Moveable> getMoveables() {
+        return this.movingObjects;
+    }
+
     private void drawMoveables(Canvas canvas) {
         for (int i = 0; i < this.movingObjects.size(); i++) {
             Moveable currentMovingObject = this.movingObjects.get(i);

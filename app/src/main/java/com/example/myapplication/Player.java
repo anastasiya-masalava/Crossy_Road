@@ -48,6 +48,10 @@ public class Player {
         posY = 500;
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public int getLives() {
         return lives;
     }
