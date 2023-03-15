@@ -34,14 +34,21 @@ public class Sprint3Tests {
         int unitHeight = (height - onepixel * 11) / 25;
 
 
-        Bitmap bitmap = BitmapFactory.decodeResource(appContext.getResources(), R.drawable.fox);
-        Bitmap bitmap2 = BitmapFactory.decodeResource(appContext.getResources(), R.drawable.lifes);
-        Bitmap bitmap3 = BitmapFactory.decodeResource(appContext.getResources(), R.drawable.coin);
+        Bitmap bitmap = BitmapFactory.decodeResource(appContext.getResources(),
+                R.drawable.fox);
+        Bitmap bitmap2 = BitmapFactory.decodeResource(appContext.getResources(),
+                R.drawable.lifes);
+        Bitmap bitmap3 = BitmapFactory.decodeResource(appContext.getResources(),
+                R.drawable.coin);
 
-        Bitmap bitmap4 = BitmapFactory.decodeResource(appContext.getResources(), R.drawable.down_arrow);
-        Bitmap bitmap5 = BitmapFactory.decodeResource(appContext.getResources(), R.drawable.up_arrow);
-        Bitmap bitmap6 = BitmapFactory.decodeResource(appContext.getResources(), R.drawable.right_arrow);
-        Bitmap bitmap7 = BitmapFactory.decodeResource(appContext.getResources(), R.drawable.left_arrow);
+        Bitmap bitmap4 = BitmapFactory.decodeResource(appContext.getResources(),
+                R.drawable.down_arrow);
+        Bitmap bitmap5 = BitmapFactory.decodeResource(appContext.getResources(),
+                R.drawable.up_arrow);
+        Bitmap bitmap6 = BitmapFactory.decodeResource(appContext.getResources(),
+                R.drawable.right_arrow);
+        Bitmap bitmap7 = BitmapFactory.decodeResource(appContext.getResources(),
+                R.drawable.left_arrow);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
         int[] units = new int[]{unit, onepixel, unitHeight};

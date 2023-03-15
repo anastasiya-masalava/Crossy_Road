@@ -41,7 +41,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private Context context;
 
     private int updatesCount;   // Integer to keep track of how many updates there have been
-    private int SCREEN_WIDTH;
+    private int screenWidth;
 
 
     private static int endRiverTile;
@@ -86,7 +86,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.movingObjects = new ArrayList<>();
         this.updatesCount = 0;
         this.context = context;
-        this.SCREEN_WIDTH = context.getApplicationContext().getResources().getDisplayMetrics().widthPixels;
+        this.screenWidth = context.getApplicationContext()
+                .getResources().getDisplayMetrics().widthPixels;
 
         // Add initial moving objects
         addMoveable(new Car(context, getRowNCoordinateY(8)));
@@ -156,7 +157,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             currentMovingObject.update();
             int currentPosX = currentMovingObject.getPosX();
             // Check if object is going off the screen. If so, remove the object from the game
-            if (currentPosX > SCREEN_WIDTH || currentPosX < 0) {
+            if (currentPosX > screenWidth || currentPosX < 0) {
                 removeMoveable(currentMovingObject);
             }
         }
