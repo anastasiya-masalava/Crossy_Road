@@ -163,7 +163,7 @@ public class Player {
                     score += 2; // river tiles
                 } else {
                     score++; // goal tiles
-                };
+                }
                 positions.add(posY);
             }
         }
