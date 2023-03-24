@@ -25,6 +25,10 @@ public class GamePage extends ConfigPage {
         GamePage.changeY = changeY;
     }
 
+    public static void setChangeY(int changeY) {
+        GamePage.changeY = changeY;
+    }
+
     private static int changeX = 0;
     private static int changeY = 0;
 
@@ -34,8 +38,18 @@ public class GamePage extends ConfigPage {
 
     private static int score = 0;
 
+    public static boolean isIsExit() {
+        return isExit;
+    }
+
+    private static boolean isExit = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        isExit = false;
+        Player.setScore(0);
+        changeX = 0;
+        changeY = 0;
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -130,7 +144,7 @@ public class GamePage extends ConfigPage {
         int btny = 1660;
 
         int exit_y = 80;
-        int exit_x = Player.getCanvasWidth()/2 - 60;
+        int exit_x = Player.getCanvasWidth() / 2 - 60;
 
         if (x >= btn1x - buttonSize && x <= btn1x + buttonSize
                 && y >= btny + 60 - buttonSize && y <= btny + 60 + buttonSize) {
@@ -150,7 +164,10 @@ public class GamePage extends ConfigPage {
             changeX -= 1;
         } else if (x >= exit_x - exitSize && x <= exit_x + exitSize
                 && y >= 250 && y <= 350) {
+            isExit = true;
             System.out.println("Exit pressed");
+            Intent i = new Intent(getApplicationContext(), ExitPage.class);
+            startActivity(i);
         }
         return true;
     }

@@ -28,11 +28,15 @@ public class Player {
     private Bitmap bitmap7;
     private Bitmap bitmap8;
     private int lives;
-    private String name;
+    private static String name;
 
+    public static void setScore(int score) {
+        Player.score = score;
+    }
+
+    private static int score;
     private int posX;
     private int posY;
-    private int score = 0;
 
 
     private Set<Object> positions = new HashSet<>(); // hashset with posY values
@@ -61,7 +65,7 @@ public class Player {
         return canvasHeight;
     }
 
-    public int getScore() {
+    public static int getScore() {
         return score;
     }
 
@@ -69,7 +73,7 @@ public class Player {
         return lives;
     }
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
