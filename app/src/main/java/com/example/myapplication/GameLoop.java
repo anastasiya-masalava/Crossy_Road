@@ -59,7 +59,7 @@ public class GameLoop extends Thread {
         // Height: 1648
         // Width: 1080
 
-        while (isRunning) {
+        while (isRunning && !GamePage.isIsExit()) {
             try {
                 canvas = surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
