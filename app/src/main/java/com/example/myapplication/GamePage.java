@@ -25,6 +25,10 @@ public class GamePage extends ConfigPage {
         GamePage.changeY = changeY;
     }
 
+    public static void setChangeY(int changeY) {
+        GamePage.changeY = changeY;
+    }
+
     private static int changeX = 0;
     private static int changeY = 0;
 
@@ -34,8 +38,18 @@ public class GamePage extends ConfigPage {
 
     private static int score = 0;
 
+    public static boolean isIsExit() {
+        return isExit;
+    }
+
+    private static boolean isExit = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        isExit = false;
+        Player.setScore(0);
+        changeX = 0;
+        changeY = 0;
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -91,16 +105,19 @@ public class GamePage extends ConfigPage {
         Bitmap bitmap5 = BitmapFactory.decodeResource(getResources(), R.drawable.up_arrow);
         Bitmap bitmap6 = BitmapFactory.decodeResource(getResources(), R.drawable.right_arrow);
         Bitmap bitmap7 = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow);
+        Bitmap bitmap8 = BitmapFactory.decodeResource(getResources(), R.drawable.exit_2);
         //size of player will be 1.3 unit x 1.3 unit
         bitmap = getResizedBitmap(bitmap, (int) ((int) unit * 1.3), (int) ((int) unit * 1.3));
         bitmap2 = getResizedBitmap(bitmap2, 100, 100);
         bitmap3 = getResizedBitmap(bitmap3, 150, 150);
-        bitmap4 = getResizedBitmap(bitmap4, 150, 150);
-        bitmap5 = getResizedBitmap(bitmap5, 150, 150);
-        bitmap6 = getResizedBitmap(bitmap6, 150, 150);
-        bitmap7 = getResizedBitmap(bitmap7, 150, 150);
+        bitmap4 = getResizedBitmap(bitmap4, 100, 100);
+        bitmap5 = getResizedBitmap(bitmap5, 100, 100);
+        bitmap6 = getResizedBitmap(bitmap6, 100, 100);
+        bitmap7 = getResizedBitmap(bitmap7, 100, 100);
+        bitmap8 = getResizedBitmap(bitmap8, 120, 120);
 
-        Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
+        Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7, bitmap8};
+
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
         Game newGame = new Game(this, playerName, bitmap, lives, bitmaps, units, margins);
@@ -115,21 +132,25 @@ public class GamePage extends ConfigPage {
 
         float x = event.getX();
         float y = event.getY();
-
-        int buttonSize = 75;
-
-        int btn1x = 905;
-        int btn2x = 705;
-        int btn3x = 505;
-        int btn4x = 305;
+        System.out.println(x);
+        System.out.println(y);
+        int buttonSize = 50;
+        int exitSize = 60;
+        int btn1x = Player.getCanvasWidth() - 600 + buttonSize;
+        int btn2x = Player.getCanvasWidth() - 600 + buttonSize;
+        int btn3x = Player.getCanvasWidth() - 500 + buttonSize;
+        int btn4x = Player.getCanvasWidth() - 700 + buttonSize;
         int btny = 1660;
 
+        int exit_y = 80;
+        int exit_x = Player.getCanvasWidth() / 2 - 60;
+
         if (x >= btn1x - buttonSize && x <= btn1x + buttonSize
-                && y >= btny - buttonSize && y <= btny + buttonSize) {
+                && y >= btny + 60 - buttonSize && y <= btny + 60 + buttonSize) {
             System.out.println("Button 1 pressed"); //down
             changeY += 1;
         } else if (x >= btn2x - buttonSize && x <= btn2x + buttonSize
-                && y >= btny - buttonSize && y <= btny + buttonSize) {
+                && y >= btny - 60 - buttonSize && y <= btny - 60 + buttonSize) {
             System.out.println("Button 2 pressed");
             changeY -= 1;
         } else if (x >= btn3x - buttonSize && x <= btn3x + buttonSize
@@ -140,6 +161,12 @@ public class GamePage extends ConfigPage {
                 && y >= btny - buttonSize && y <= btny + buttonSize) {
             System.out.println("Button 4 pressed");
             changeX -= 1;
+        } else if (x >= exit_x - exitSize && x <= exit_x + exitSize
+                && y >= 250 && y <= 350) {
+            isExit = true;
+            System.out.println("Exit pressed");
+            Intent i = new Intent(getApplicationContext(), ExitPage.class);
+            startActivity(i);
         }
         return true;
     }

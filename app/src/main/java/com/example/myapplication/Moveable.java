@@ -7,4 +7,6 @@ public interface Moveable {
     void update();
 
     int getPosX();
+
+    int getPosY();
 }
