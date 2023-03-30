@@ -9,4 +9,8 @@ public interface Moveable {
     int getPosX();
 
     int getPosY();
+
+    int getHeight();
+
+    int getWidth();
 }

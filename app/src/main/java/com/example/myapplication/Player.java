@@ -113,6 +113,14 @@ public class Player {
         this.bitmap = bitmap;
     }
 
+    public int getPlayerWidth(){
+       return bitmap.getWidth();
+    }
+
+    public int getPlayerHeight(){
+        return bitmap.getHeight();
+    }
+
     public void draw(Canvas canvas, int marginleft, int marginup, int unit) {
         Paint paint = new Paint();
         final float testTextSize = 70f;
