@@ -105,6 +105,13 @@ public class GameLoop extends Thread {
                 framesCounter = 0;
                 startTime = System.currentTimeMillis();
             }
+
+            if(game.getDidCollide()){
+                System.out.println("Did collide called from gameloop");
+                game.setDidCollide(false);
+                GamePage.movePlayerToStart();
+                game.manageCollision();
+            }
         }
     }
 }

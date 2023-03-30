@@ -44,6 +44,8 @@ public class GamePage extends ConfigPage {
 
     private static boolean isExit = false;
 
+    public static boolean didCollide;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         isExit = false;
@@ -121,6 +123,7 @@ public class GamePage extends ConfigPage {
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
         Game newGame = new Game(this, playerName, bitmap, lives, bitmaps, units, margins);
+        didCollide = newGame.getDidCollide();
         setContentView(newGame);
     }
 
@@ -171,6 +174,11 @@ public class GamePage extends ConfigPage {
         return true;
     }
 
+    public static void movePlayerToStart(){
+        changeX = -changeX;
+        changeY = -changeY;
+    }
+
 
     public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
         int width = bm.getWidth();
@@ -185,4 +193,5 @@ public class GamePage extends ConfigPage {
         bm.recycle();
         return resizedBitmap;
     }
+
 }

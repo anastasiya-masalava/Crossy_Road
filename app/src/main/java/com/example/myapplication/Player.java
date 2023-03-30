@@ -38,7 +38,6 @@ public class Player {
     private int posX;
     private int posY;
 
-
     private Set<Object> positions = new HashSet<>(); // hashset with posY values
 
     public Player(Context context, Bitmap bitmap, int lives, String name, Bitmap[] bitmaps) {

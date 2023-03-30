@@ -170,13 +170,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             // check for collisions
             if(collisionDidOccur(player, currentMovingObject)) {
                 System.out.println("did collide with " + i );
-//                this.didCollide = true;
+//                System.out.println("PosX: " + player.getPosX() + "; PosY: " + player.getPosY());
+                didCollide = true;
             }
         }
     }
 
     public boolean collisionDidOccur(Player player, Moveable vehicle){
-        if (isInRange(player.getPosX(), vehicle.getPosX(), player.getPlayerWidth(), vehicle.getHeight(), 15, 15)
+        if (isInRange(player.getPosX(), vehicle.getPosX(), player.getPlayerWidth(), vehicle.getWidth(), 15, 15)
                 && isInRange(player.getPosY(),vehicle.getPosY(), player.getPlayerHeight(), vehicle.getHeight(), 50, 50)) {
             return true;
         }
@@ -188,8 +189,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         int lower2 = pos2;
         int upper1 = pos1 + range1 - offset1;
         int upper2 = pos2 + range2 - offset2;
-        Range<Integer> myRange1 = new Range(lower1, upper1);
-        Range<Integer> myRange2 = new Range(lower2, upper2);
+        Range<Integer> myRange1 = new Range(Math.min(lower1, upper1), Math.max(lower1, upper1));
+        Range<Integer> myRange2 = new Range(Math.min(lower2, upper2), Math.max(lower2, upper2));
 
         try {
             Range<Integer> intersectRange = myRange1.intersect(myRange2);
@@ -275,5 +276,17 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public ArrayList<Moveable> getMovingObjects(){
         return this.movingObjects;
+    }
+
+    public boolean getDidCollide(){
+        return didCollide;
+    }
+
+    public void setDidCollide(boolean didCollide){
+        this.didCollide = didCollide;
+    }
+
+    public void manageCollision(){
+        this.player.loseLife();
     }
 }
