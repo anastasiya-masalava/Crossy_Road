@@ -59,6 +59,7 @@ public class GameLoop extends Thread {
         // Height: 1648
         // Width: 1080
         int collideTime = 0;
+        boolean canProcessCollide = true;
 
         while (isRunning && !GamePage.isIsExit()) {
             try {
@@ -108,12 +109,20 @@ public class GameLoop extends Thread {
             }
 
 
-            if(game.getDidCollide() && collideTime == 0){
+            if(game.getDidCollide() && canProcessCollide){
+                canProcessCollide = false;
                 System.out.println("Did collide called from gameloop");
                 GamePage.movePlayerToStart();
                 game.manageCollision();
                 game.setDidCollide(false);
-                collideTime++;
+            }
+
+            if (!canProcessCollide) {
+                collideTime += 1;
+                if (collideTime > 10) {
+                    canProcessCollide = true;
+                    collideTime = 0;
+                }
             }
         }
     }
