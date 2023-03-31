@@ -46,6 +46,9 @@ public class GamePage extends ConfigPage {
 
     public static boolean didCollide;
 
+    private static int countVert = 0;
+    private static int countHoriz = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         isExit = false;
@@ -175,8 +178,9 @@ public class GamePage extends ConfigPage {
     }
 
     public static void movePlayerToStart(){
-        changeX = -changeX;
-        changeY = -changeY;
+        System.out.println("horiz: " + countHoriz + "; vert: " + countVert);
+        changeX = 0;
+        changeY = 0;
     }
 
 

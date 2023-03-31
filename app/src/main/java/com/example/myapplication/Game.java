@@ -171,7 +171,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             if(collisionDidOccur(player, currentMovingObject)) {
                 System.out.println("did collide with " + i );
 //                System.out.println("PosX: " + player.getPosX() + "; PosY: " + player.getPosY());
+//                removeMoveable(currentMovingObject);
                 didCollide = true;
+                player.setDidCollide(true);
             }
         }
     }
@@ -288,5 +290,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void manageCollision(){
         this.player.loseLife();
+        Player.setScore(0);
     }
 }

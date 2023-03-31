@@ -38,6 +38,10 @@ public class Player {
     private int posX;
     private int posY;
 
+    private boolean didCollide;
+
+    public void setDidCollide(boolean didCollide) {this.didCollide = didCollide;}
+
     private Set<Object> positions = new HashSet<>(); // hashset with posY values
 
     public Player(Context context, Bitmap bitmap, int lives, String name, Bitmap[] bitmaps) {
@@ -156,6 +160,7 @@ public class Player {
             }
             canvas.drawBitmap(bitmap, this.posX, this.posY, paint);
         }
+
         updateScore(prevX, prevY);
 
 
