@@ -38,7 +38,7 @@ public class Player {
     private int posX;
     private int posY;
 
-    private boolean didCollide;
+    private boolean didCollide = false;
 
     public void setDidCollide(boolean didCollide) {
         this.didCollide = didCollide;

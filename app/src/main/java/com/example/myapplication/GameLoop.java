@@ -10,6 +10,10 @@ public class GameLoop extends Thread {
     private final SurfaceHolder surfaceHolder;
 
     private boolean isRunning;
+
+    public boolean getIsRunning() {
+        return this.isRunning;
+    }
     private int averageUPS;
     private int averageFPS;
 
