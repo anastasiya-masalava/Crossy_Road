@@ -11,6 +11,9 @@ import java.util.Set;
 
 
 public class Player {
+    private static int canvasWidth;
+    private static int canvasHeight;
+
     private Context context;
     private Bitmap bitmap;
     private Bitmap bitmap2;
@@ -23,13 +26,23 @@ public class Player {
     private Bitmap bitmap6;
 
     private Bitmap bitmap7;
+    private Bitmap bitmap8;
     private int lives;
-    private String name;
+    private static String name;
 
+    public static void setScore(int score) {
+        Player.score = score;
+    }
+
+    private static int score;
     private int posX;
     private int posY;
-    private int score = 0;
 
+    private boolean didCollide;
+
+    public void setDidCollide(boolean didCollide) {
+        this.didCollide = didCollide;
+    }
 
     private Set<Object> positions = new HashSet<>(); // hashset with posY values
 
@@ -42,13 +55,22 @@ public class Player {
         this.bitmap5 = bitmaps[3];
         this.bitmap6 = bitmaps[4];
         this.bitmap7 = bitmaps[5];
+        this.bitmap8 = bitmaps[6];
         this.lives = lives;
         this.name = name;
         posX = 500;
         posY = 500;
     }
 
-    public int getScore() {
+    public static int getCanvasWidth() {
+        return canvasWidth;
+    }
+
+    public static int getCanvasHeight() {
+        return canvasHeight;
+    }
+
+    public static int getScore() {
         return score;
     }
 
@@ -56,7 +78,7 @@ public class Player {
         return lives;
     }
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
@@ -96,6 +118,14 @@ public class Player {
         this.bitmap = bitmap;
     }
 
+    public int getPlayerWidth() {
+        return bitmap.getWidth();
+    }
+
+    public int getPlayerHeight() {
+        return bitmap.getHeight();
+    }
+
     public void draw(Canvas canvas, int marginleft, int marginup, int unit) {
         Paint paint = new Paint();
         final float testTextSize = 70f;
@@ -132,15 +162,19 @@ public class Player {
             }
             canvas.drawBitmap(bitmap, this.posX, this.posY, paint);
         }
+
         updateScore(prevX, prevY);
 
 
         canvas.drawBitmap(bitmap2, 50, 75, paint);
         canvas.drawBitmap(bitmap3, canvas.getWidth() - 250, 55, paint);
-        canvas.drawBitmap(bitmap4, canvas.getWidth() - 250, canvas.getHeight() - 230, paint);
-        canvas.drawBitmap(bitmap5, canvas.getWidth() - 450, canvas.getHeight() - 230, paint);
-        canvas.drawBitmap(bitmap6, canvas.getWidth() - 650, canvas.getHeight() - 230, paint);
-        canvas.drawBitmap(bitmap7, canvas.getWidth() - 850, canvas.getHeight() - 230, paint);
+        canvas.drawBitmap(bitmap4, canvas.getWidth() - 600, canvas.getHeight() - 150, paint);
+        canvas.drawBitmap(bitmap5, canvas.getWidth() - 600, canvas.getHeight() - 270, paint);
+        canvas.drawBitmap(bitmap6, canvas.getWidth() - 500, canvas.getHeight() - 210, paint);
+        canvas.drawBitmap(bitmap7, canvas.getWidth() - 700, canvas.getHeight() - 210, paint);
+        canvas.drawBitmap(bitmap8, canvas.getWidth() / 2 - 60, 20, paint);
+        canvasWidth = canvas.getWidth();
+        canvasHeight = canvas.getHeight();
         drawLives(canvas, paint);
         drawName(canvas, paint);
         drawCoins(canvas, paint);
@@ -177,8 +211,9 @@ public class Player {
     private void drawName(Canvas canvas, Paint paint) {
         String levelText = this.name;
         paint.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText(levelText, canvas.getWidth() / 2, 150, paint);
+        canvas.drawText(levelText, canvas.getWidth() / 2, 200, paint);
     }
+
 
     private void drawCoins(Canvas canvas, Paint paint) {
         String levelText = Integer.toString(score);
@@ -187,6 +222,7 @@ public class Player {
 
 
     public void update() {
-
     }
+
+
 }

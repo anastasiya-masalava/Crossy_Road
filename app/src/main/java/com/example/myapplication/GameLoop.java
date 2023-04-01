@@ -58,8 +58,10 @@ public class GameLoop extends Thread {
 
         // Height: 1648
         // Width: 1080
+        int collideTime = 0;
+        boolean canProcessCollide = true;
 
-        while (isRunning) {
+        while (isRunning && !GamePage.isIsExit()) {
             try {
                 canvas = surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
@@ -105,7 +107,25 @@ public class GameLoop extends Thread {
                 framesCounter = 0;
                 startTime = System.currentTimeMillis();
             }
-        }
 
+
+            if (game.getDidCollide()) {
+                if (canProcessCollide) {
+                    canProcessCollide = false;
+                    System.out.println("Did collide called from gameloop");
+                    GamePage.movePlayerToStart();
+                    game.manageCollision();
+                }
+                game.setDidCollide(false);
+            }
+
+            if (!canProcessCollide) {
+                collideTime += 1;
+                if (collideTime > 10) {
+                    canProcessCollide = true;
+                    collideTime = 0;
+                }
+            }
+        }
     }
 }

@@ -1,11 +1,13 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.util.Range;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -65,6 +67,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         return endStartTile;
     }
 
+    private boolean didCollide;
+
 
     //    private final Map map;
     public Game(Context context, String playerName, Bitmap inBitmap, int lives,
@@ -95,6 +99,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         addMoveable(new Truck(context, getRowNCoordinateY(12)));
 
         this.setFocusable(true);
+
+        this.didCollide = false;
     }
 
     @Override
@@ -108,7 +114,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
-
     }
 
     @Override
@@ -160,7 +165,53 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             if (currentPosX > screenWidth || currentPosX < 0) {
                 removeMoveable(currentMovingObject);
             }
+
+            // check for collisions
+            if (collisionDidOccur(player, currentMovingObject)) {
+                System.out.println("did collide with " + i);
+                didCollide = true;
+            }
+
+            // check for water collision
+            if (waterCollisionDidOccur(player)) {
+                System.out.println("water collide with " + i);
+                didCollide = true;
+            }
         }
+    }
+
+    public boolean waterCollisionDidOccur(Player player) {
+        return (player.getPosY() > getRowNCoordinateY(2)
+                && player.getPosY() < getRowNCoordinateY(5) - 40);
+    }
+
+    public boolean collisionDidOccur(Player player, Moveable vehicle) {
+        if (isInRange(player.getPosX(), vehicle.getPosX(), player.getPlayerWidth(),
+                vehicle.getWidth(), 15, 15)
+                && isInRange(player.getPosY(), vehicle.getPosY(), player.getPlayerHeight(),
+                vehicle.getHeight(), 50, 50)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isInRange(int pos1, int pos2, int range1, int range2, int offset1,
+                              int offset2) {
+        int lower1 = pos1;
+        int lower2 = pos2;
+        int upper1 = pos1 + range1 - offset1;
+        int upper2 = pos2 + range2 - offset2;
+        Range<Integer> myRange1 = new Range(Math.min(lower1, upper1), Math.max(lower1, upper1));
+        Range<Integer> myRange2 = new Range(Math.min(lower2, upper2), Math.max(lower2, upper2));
+
+        try {
+            Range<Integer> intersectRange = myRange1.intersect(myRange2);
+            if (myRange1.contains(intersectRange)) {
+                return true;
+            }
+        } catch (IllegalArgumentException e) {
+        }
+        return false;
     }
 
     public void drawMap(Canvas canvas) {
@@ -234,4 +285,32 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void removeMoveable(Moveable movingObjectToRemove) {
         this.movingObjects.remove(movingObjectToRemove);
     }
+
+    public ArrayList<Moveable> getMovingObjects() {
+        return this.movingObjects;
+    }
+
+    public boolean getDidCollide() {
+        return didCollide;
+    }
+
+    public void setDidCollide(boolean didCollide) {
+        this.didCollide = didCollide;
+    }
+
+    public void manageCollision() {
+        if (player.getLives() > 1) {
+            this.player.loseLife();
+            Player.setScore(0);
+        } else {
+            moveToGameOverPage();
+        }
+    }
+
+    public void moveToGameOverPage() {
+        Intent i = new Intent(this.context, ExitPage.class);
+        this.context.startActivity(i);
+        GamePage.setIsExit(true);
+    }
+
 }
