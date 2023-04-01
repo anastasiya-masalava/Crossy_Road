@@ -46,7 +46,11 @@ public class MovingObject implements Moveable {
         return this.speed;
     }
 
-    public int getHeight() { return this.objectBitmap.getHeight(); }
+    public int getHeight() {
+        return this.objectBitmap.getHeight();
+    }
 
-    public int getWidth() { return this.objectBitmap.getWidth(); }
+    public int getWidth() {
+        return this.objectBitmap.getWidth();
+    }
 }
