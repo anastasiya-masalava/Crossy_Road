@@ -174,15 +174,20 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
             // check for water collision
             if (waterCollisionDidOccur(player)) {
-                System.out.println("water collide with " + i);
+                System.out.println("did collide with water");
                 didCollide = true;
             }
         }
     }
 
     public boolean waterCollisionDidOccur(Player player) {
-        return (player.getPosY() > getRowNCoordinateY(2)
-                && player.getPosY() < getRowNCoordinateY(5) - 40);
+        if(player.getPosY() != 500 && player.getPosX() != 500) {
+            return (player.getPosY() > getRowNCoordinateY(2)
+                    && player.getPosY() < getRowNCoordinateY(5) - 40);
+        }
+        else {
+            return false;
+        }
     }
 
     public boolean collisionDidOccur(Player player, Moveable vehicle) {
