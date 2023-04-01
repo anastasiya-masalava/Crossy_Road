@@ -273,10 +273,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.movingObjects.remove(movingObjectToRemove);
     }
 
-    public ArrayList<Moveable> getMovingObjects(){
-        return this.movingObjects;
-    }
-
     public boolean getDidCollide(){
         return didCollide;
     }
@@ -291,7 +287,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             Player.setScore(0);
         }
         else {
-            moveToGameOverPage();
+           moveToGameOverPage();
         }
     }
 
