@@ -38,6 +38,9 @@ public class Player {
     private int posX;
     private int posY;
 
+    private boolean didCollide;
+
+    public void setDidCollide(boolean didCollide) {this.didCollide = didCollide;}
 
     private Set<Object> positions = new HashSet<>(); // hashset with posY values
 
@@ -113,6 +116,14 @@ public class Player {
         this.bitmap = bitmap;
     }
 
+    public int getPlayerWidth(){
+       return bitmap.getWidth();
+    }
+
+    public int getPlayerHeight(){
+        return bitmap.getHeight();
+    }
+
     public void draw(Canvas canvas, int marginleft, int marginup, int unit) {
         Paint paint = new Paint();
         final float testTextSize = 70f;
@@ -149,6 +160,7 @@ public class Player {
             }
             canvas.drawBitmap(bitmap, this.posX, this.posY, paint);
         }
+
         updateScore(prevX, prevY);
 
 
@@ -208,7 +220,6 @@ public class Player {
 
 
     public void update() {
-
     }
 
 

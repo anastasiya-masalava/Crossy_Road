@@ -44,6 +44,13 @@ public class GamePage extends ConfigPage {
 
     private static boolean isExit = false;
 
+    public static void setIsExit(boolean needsToExit){isExit = needsToExit;}
+
+    public static boolean didCollide;
+
+    private static int countVert = 0;
+    private static int countHoriz = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         isExit = false;
@@ -117,12 +124,11 @@ public class GamePage extends ConfigPage {
         bitmap8 = getResizedBitmap(bitmap8, 120, 120);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7, bitmap8};
+
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
         Game newGame = new Game(this, playerName, bitmap, lives, bitmaps, units, margins);
         setContentView(newGame);
-
-
     }
 
     @Override
@@ -172,6 +178,17 @@ public class GamePage extends ConfigPage {
         return true;
     }
 
+    public static void movePlayerToStart(){
+        System.out.println("horiz: " + countHoriz + "; vert: " + countVert);
+        changeX = 0;
+        changeY = 0;
+    }
+
+    public void moveToGameOverPage(){
+        Intent i = new Intent(getApplicationContext(), ExitPage.class);
+        startActivity(i);
+    }
+
 
     public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
         int width = bm.getWidth();
@@ -186,4 +203,5 @@ public class GamePage extends ConfigPage {
         bm.recycle();
         return resizedBitmap;
     }
+
 }
