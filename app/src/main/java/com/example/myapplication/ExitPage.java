@@ -17,11 +17,13 @@ public class ExitPage extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.num_score);
         TextView textView2 = (TextView) findViewById(R.id.player);
         textView.setText(score);
-        textView2.setText("Game over, "+name);
+        textView2.setText("Game over, " + name);
     }
+
     public void exitApp(View v) {
         this.finishAffinity();
     }
+
     public void toConfigPage(View v) {
         startActivity(new Intent(ExitPage.this, ConfigPage.class));
     }

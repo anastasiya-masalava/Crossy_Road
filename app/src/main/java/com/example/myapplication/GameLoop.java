@@ -109,7 +109,7 @@ public class GameLoop extends Thread {
             }
 
 
-            if(game.getDidCollide()) {
+            if (game.getDidCollide()) {
                 if (canProcessCollide) {
                     canProcessCollide = false;
                     System.out.println("Did collide called from gameloop");

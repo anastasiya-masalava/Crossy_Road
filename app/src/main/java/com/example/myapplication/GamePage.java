@@ -44,9 +44,9 @@ public class GamePage extends ConfigPage {
 
     private static boolean isExit = false;
 
-    public static void setIsExit(boolean needsToExit){isExit = needsToExit;}
-
-    public static boolean didCollide;
+    public static void setIsExit(boolean needsToExit) {
+        isExit = needsToExit;
+    }
 
     private static int countVert = 0;
     private static int countHoriz = 0;
@@ -123,7 +123,8 @@ public class GamePage extends ConfigPage {
         bitmap7 = getResizedBitmap(bitmap7, 100, 100);
         bitmap8 = getResizedBitmap(bitmap8, 120, 120);
 
-        Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7, bitmap8};
+        Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7,
+            bitmap8};
 
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
@@ -149,8 +150,8 @@ public class GamePage extends ConfigPage {
         int btn4x = Player.getCanvasWidth() - 700 + buttonSize;
         int btny = 1660;
 
-        int exit_y = 80;
-        int exit_x = Player.getCanvasWidth() / 2 - 60;
+        int exitY = 80;
+        int exitX = Player.getCanvasWidth() / 2 - 60;
 
         if (x >= btn1x - buttonSize && x <= btn1x + buttonSize
                 && y >= btny + 60 - buttonSize && y <= btny + 60 + buttonSize) {
@@ -168,7 +169,7 @@ public class GamePage extends ConfigPage {
                 && y >= btny - buttonSize && y <= btny + buttonSize) {
             System.out.println("Button 4 pressed");
             changeX -= 1;
-        } else if (x >= exit_x - exitSize && x <= exit_x + exitSize
+        } else if (x >= exitX - exitSize && x <= exitX + exitSize
                 && y >= 250 && y <= 350) {
             isExit = true;
             System.out.println("Exit pressed");
@@ -178,13 +179,13 @@ public class GamePage extends ConfigPage {
         return true;
     }
 
-    public static void movePlayerToStart(){
+    public static void movePlayerToStart() {
         System.out.println("horiz: " + countHoriz + "; vert: " + countVert);
         changeX = 0;
         changeY = 0;
     }
 
-    public void moveToGameOverPage(){
+    public void moveToGameOverPage() {
         Intent i = new Intent(getApplicationContext(), ExitPage.class);
         startActivity(i);
     }
