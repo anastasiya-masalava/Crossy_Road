@@ -14,6 +14,7 @@ import android.view.SurfaceView;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -67,7 +68,17 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         return endStartTile;
     }
 
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public GameLoop getGameLoop() {
+        return this.gameLoop;
+    }
+
     private boolean didCollide;
+
+    private Random rand = new Random();
 
 
     //    private final Map map;
@@ -103,6 +114,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.didCollide = false;
     }
 
+    public void sync() {
+        try {
+            Thread.sleep(rand.nextInt(3000) + 2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
         gameLoop.startLoop();
@@ -118,6 +137,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void draw(Canvas canvas) {
+        if (canvas == null) {
+            return;
+        }
         super.draw(canvas);
 
         canvas.drawRGB(41, 41, 41);
