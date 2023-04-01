@@ -40,7 +40,9 @@ public class Player {
 
     private boolean didCollide;
 
-    public void setDidCollide(boolean didCollide) {this.didCollide = didCollide;}
+    public void setDidCollide(boolean didCollide) {
+        this.didCollide = didCollide;
+    }
 
     private Set<Object> positions = new HashSet<>(); // hashset with posY values
 
@@ -116,11 +118,11 @@ public class Player {
         this.bitmap = bitmap;
     }
 
-    public int getPlayerWidth(){
-       return bitmap.getWidth();
+    public int getPlayerWidth() {
+        return bitmap.getWidth();
     }
 
-    public int getPlayerHeight(){
+    public int getPlayerHeight() {
         return bitmap.getHeight();
     }
 
@@ -170,7 +172,7 @@ public class Player {
         canvas.drawBitmap(bitmap5, canvas.getWidth() - 600, canvas.getHeight() - 270, paint);
         canvas.drawBitmap(bitmap6, canvas.getWidth() - 500, canvas.getHeight() - 210, paint);
         canvas.drawBitmap(bitmap7, canvas.getWidth() - 700, canvas.getHeight() - 210, paint);
-        canvas.drawBitmap(bitmap8, canvas.getWidth()/2-60, 20, paint);
+        canvas.drawBitmap(bitmap8, canvas.getWidth() / 2 - 60, 20, paint);
         canvasWidth = canvas.getWidth();
         canvasHeight = canvas.getHeight();
         drawLives(canvas, paint);

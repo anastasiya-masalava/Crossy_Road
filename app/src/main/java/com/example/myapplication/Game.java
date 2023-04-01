@@ -70,7 +70,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private boolean didCollide;
 
 
-
     //    private final Map map;
     public Game(Context context, String playerName, Bitmap inBitmap, int lives,
                 Bitmap[] bitmaps, int[] units, int[] margins) {
@@ -168,22 +167,36 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
 
             // check for collisions
-            if(collisionDidOccur(player, currentMovingObject)) {
-                System.out.println("did collide with " + i );
+            if (collisionDidOccur(player, currentMovingObject)) {
+                System.out.println("did collide with " + i);
+                didCollide = true;
+            }
+
+            // check for water collision
+            if (waterCollisionDidOccur(player)) {
+                System.out.println("water collide with " + i);
                 didCollide = true;
             }
         }
     }
 
-    public boolean collisionDidOccur(Player player, Moveable vehicle){
-        if (isInRange(player.getPosX(), vehicle.getPosX(), player.getPlayerWidth(), vehicle.getWidth(), 15, 15)
-                && isInRange(player.getPosY(),vehicle.getPosY(), player.getPlayerHeight(), vehicle.getHeight(), 50, 50)) {
+    public boolean waterCollisionDidOccur(Player player) {
+        return (player.getPosY() > getRowNCoordinateY(2)
+                && player.getPosY() < getRowNCoordinateY(5) - 40);
+    }
+
+    public boolean collisionDidOccur(Player player, Moveable vehicle) {
+        if (isInRange(player.getPosX(), vehicle.getPosX(), player.getPlayerWidth(),
+                vehicle.getWidth(), 15, 15)
+                && isInRange(player.getPosY(), vehicle.getPosY(), player.getPlayerHeight(),
+                vehicle.getHeight(), 50, 50)) {
             return true;
         }
         return false;
     }
 
-    private boolean isInRange(int pos1, int pos2,  int range1, int range2, int offset1, int offset2){
+    private boolean isInRange(int pos1, int pos2, int range1, int range2, int offset1,
+                              int offset2) {
         int lower1 = pos1;
         int lower2 = pos2;
         int upper1 = pos1 + range1 - offset1;
@@ -193,7 +206,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         try {
             Range<Integer> intersectRange = myRange1.intersect(myRange2);
-            if(myRange1.contains(intersectRange)){
+            if (myRange1.contains(intersectRange)) {
                 return true;
             }
         } catch (IllegalArgumentException e) {
@@ -273,29 +286,28 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.movingObjects.remove(movingObjectToRemove);
     }
 
-    public ArrayList<Moveable> getMovingObjects(){
+    public ArrayList<Moveable> getMovingObjects() {
         return this.movingObjects;
     }
 
-    public boolean getDidCollide(){
+    public boolean getDidCollide() {
         return didCollide;
     }
 
-    public void setDidCollide(boolean didCollide){
+    public void setDidCollide(boolean didCollide) {
         this.didCollide = didCollide;
     }
 
-    public void manageCollision(){
-        if(player.getLives() > 1) {
+    public void manageCollision() {
+        if (player.getLives() > 1) {
             this.player.loseLife();
             Player.setScore(0);
-        }
-        else {
+        } else {
             moveToGameOverPage();
         }
     }
 
-    public void moveToGameOverPage(){
+    public void moveToGameOverPage() {
         Intent i = new Intent(this.context, ExitPage.class);
         this.context.startActivity(i);
         GamePage.setIsExit(true);
