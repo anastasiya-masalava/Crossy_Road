@@ -109,11 +109,13 @@ public class GameLoop extends Thread {
             }
 
 
-            if(game.getDidCollide() && canProcessCollide){
-                canProcessCollide = false;
-                System.out.println("Did collide called from gameloop");
-                GamePage.movePlayerToStart();
-                game.manageCollision();
+            if(game.getDidCollide()) {
+                if (canProcessCollide) {
+                    canProcessCollide = false;
+                    System.out.println("Did collide called from gameloop");
+                    GamePage.movePlayerToStart();
+                    game.manageCollision();
+                }
                 game.setDidCollide(false);
             }
 

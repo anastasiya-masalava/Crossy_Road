@@ -170,10 +170,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             // check for collisions
             if(collisionDidOccur(player, currentMovingObject)) {
                 System.out.println("did collide with " + i );
-//                System.out.println("PosX: " + player.getPosX() + "; PosY: " + player.getPosY());
-//                removeMoveable(currentMovingObject);
                 didCollide = true;
-                player.setDidCollide(true);
             }
         }
     }
@@ -289,7 +286,19 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void manageCollision(){
-        this.player.loseLife();
-        Player.setScore(0);
+        if(player.getLives() > 1) {
+            this.player.loseLife();
+            Player.setScore(0);
+        }
+        else {
+            moveToGameOverPage();
+        }
     }
+
+    public void moveToGameOverPage(){
+        Intent i = new Intent(this.context, ExitPage.class);
+        this.context.startActivity(i);
+        GamePage.setIsExit(true);
+    }
+
 }

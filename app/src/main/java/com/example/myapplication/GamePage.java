@@ -44,6 +44,8 @@ public class GamePage extends ConfigPage {
 
     private static boolean isExit = false;
 
+    public static void setIsExit(boolean needsToExit){isExit = needsToExit;}
+
     public static boolean didCollide;
 
     private static int countVert = 0;
@@ -126,7 +128,6 @@ public class GamePage extends ConfigPage {
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
         Game newGame = new Game(this, playerName, bitmap, lives, bitmaps, units, margins);
-        didCollide = newGame.getDidCollide();
         setContentView(newGame);
     }
 
@@ -181,6 +182,11 @@ public class GamePage extends ConfigPage {
         System.out.println("horiz: " + countHoriz + "; vert: " + countVert);
         changeX = 0;
         changeY = 0;
+    }
+
+    public void moveToGameOverPage(){
+        Intent i = new Intent(getApplicationContext(), ExitPage.class);
+        startActivity(i);
     }
 
 
