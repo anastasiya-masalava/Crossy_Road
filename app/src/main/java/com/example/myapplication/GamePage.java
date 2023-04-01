@@ -173,14 +173,12 @@ public class GamePage extends ConfigPage {
                 && y >= 250 && y <= 350) {
             isExit = true;
             System.out.println("Exit pressed");
-            Intent i = new Intent(getApplicationContext(), ExitPage.class);
-            startActivity(i);
+            moveToGameOverPage();
         }
         return true;
     }
 
     public static void movePlayerToStart() {
-        System.out.println("horiz: " + countHoriz + "; vert: " + countVert);
         changeX = 0;
         changeY = 0;
     }
@@ -189,7 +187,6 @@ public class GamePage extends ConfigPage {
         Intent i = new Intent(getApplicationContext(), ExitPage.class);
         startActivity(i);
     }
-
 
     public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
         int width = bm.getWidth();
