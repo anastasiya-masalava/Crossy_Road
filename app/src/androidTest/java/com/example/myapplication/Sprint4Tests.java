@@ -13,9 +13,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 @RunWith(AndroidJUnit4.class)
 public class Sprint4Tests {
 
@@ -51,10 +48,12 @@ public class Sprint4Tests {
         Bitmap bitmap8 = BitmapFactory.decodeResource(appContext.getResources(),
                 R.drawable.exit_2);
 
-        Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7, bitmap8};
+        Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4,
+            bitmap5, bitmap6, bitmap7, bitmap8};
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
-        game = new Game(appContext, "1234", bitmap, 10, bitmaps, units, margins);
+        game = new Game(appContext, "1234", bitmap, 10,
+            bitmaps, units, margins);
         game.sync();
     }
 
