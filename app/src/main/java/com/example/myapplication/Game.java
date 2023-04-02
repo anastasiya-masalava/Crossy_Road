@@ -46,6 +46,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private int updatesCount;   // Integer to keep track of how many updates there have been
     private int screenWidth;
 
+    private Random rand = new Random();
+
+    private int delay = 3000;
 
     private static int endRiverTile;
     private static int endSafeTile;
@@ -77,8 +80,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private boolean didCollide;
-
-    private Random rand = new Random();
 
 
     //    private final Map map;
@@ -116,7 +117,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void sync() {
         try {
-            Thread.sleep(rand.nextInt(3000) + 2000);
+            Thread.sleep(delay);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
