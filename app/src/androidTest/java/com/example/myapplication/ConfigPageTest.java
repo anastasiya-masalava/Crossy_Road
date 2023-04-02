@@ -1,43 +1,32 @@
 package com.example.myapplication;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.Looper;
-
-import androidx.test.internal.runner.junit4.AndroidJUnit4Builder;
-import androidx.test.runner.AndroidJUnit4;
-
-import org.junit.After;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ConfigPageTest
-{
-//    @Mock
+public class ConfigPageTest {
     @Mock
-    Context mApplicationContext;
+    private Context mApplicationContext;
     private ConfigPage configPage;
-//    private AutoCloseable autoClosable;
+    //  private AutoCloseable autoClosable;
 
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         configPage = new ConfigPage();
         when(mApplicationContext.getApplicationContext()).thenReturn(mApplicationContext);
     }
-//
-////        MockitoAnnotations.initMocks(this);
-//        configPage = Mockito.mock(ConfigPage.class);
-//    }
+
+    //  MockitoAnnotations.initMocks(this);
+    //  configPage = Mockito.mock(ConfigPage.class);
+    //  }
     @Test
     public void setAlertTextView() {
     }
