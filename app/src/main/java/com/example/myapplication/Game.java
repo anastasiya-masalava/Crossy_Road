@@ -204,11 +204,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public boolean waterCollisionDidOccur(Player player) {
-        if(player.getPosY() != 500 && player.getPosX() != 500) {
+        if (player.getPosY() != 500 && player.getPosX() != 500) {
             return (player.getPosY() > getRowNCoordinateY(2)
                     && player.getPosY() < getRowNCoordinateY(5) - 40);
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -314,7 +313,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.movingObjects.remove(movingObjectToRemove);
     }
 
-    public boolean getDidCollide(){
+    public boolean getDidCollide() {
         return didCollide;
     }
 
