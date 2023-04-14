@@ -7,6 +7,7 @@ import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
+import android.view.View;
 
 public class GamePage extends ConfigPage {
     public static int getChangeX() {
@@ -50,6 +51,8 @@ public class GamePage extends ConfigPage {
 
     private static int countVert = 0;
     private static int countHoriz = 0;
+
+    public static boolean soundIsOn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +116,8 @@ public class GamePage extends ConfigPage {
         Bitmap bitmap6 = BitmapFactory.decodeResource(getResources(), R.drawable.right_arrow);
         Bitmap bitmap7 = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow);
         Bitmap bitmap8 = BitmapFactory.decodeResource(getResources(), R.drawable.exit_2);
+        Bitmap soundOn = BitmapFactory.decodeResource(getResources(), R.drawable.sound_on);
+        Bitmap soundOff = BitmapFactory.decodeResource(getResources(), R.drawable.sound_off);
         //size of player will be 1.3 unit x 1.3 unit
         bitmap = getResizedBitmap(bitmap, (int) ((int) unit * 1.3), (int) ((int) unit * 1.3));
         bitmap2 = getResizedBitmap(bitmap2, 100, 100);
@@ -122,9 +127,11 @@ public class GamePage extends ConfigPage {
         bitmap6 = getResizedBitmap(bitmap6, 100, 100);
         bitmap7 = getResizedBitmap(bitmap7, 100, 100);
         bitmap8 = getResizedBitmap(bitmap8, 120, 120);
+        soundOn = getResizedBitmap(soundOn, 100, 100);
+        soundOff = getResizedBitmap(soundOff, 100, 100);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7,
-            bitmap8};
+            bitmap8, soundOn, soundOff};
 
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
@@ -149,6 +156,7 @@ public class GamePage extends ConfigPage {
         int btn3x = Player.getCanvasWidth() - 500 + buttonSize;
         int btn4x = Player.getCanvasWidth() - 700 + buttonSize;
         int btny = 1660;
+        int soundBtn = Player.getCanvasWidth() - 150 + buttonSize;
 
         int exitY = 80;
         int exitX = Player.getCanvasWidth() / 2 - 60;
@@ -173,9 +181,21 @@ public class GamePage extends ConfigPage {
                 && y >= 250 && y <= 350) {
             isExit = true;
             System.out.println("Exit pressed");
+            if(soundIsOn) { switchMusicState(); }
             moveToGameOverPage();
         }
+
+        if(x >= soundBtn - buttonSize && x <= soundBtn + buttonSize
+                && y >= btny - buttonSize && y <= btny + buttonSize){
+            System.out.println("sound is pressed");
+            switchMusicState();
+        }
         return true;
+    }
+
+    private void switchMusicState(){
+        soundIsOn = !soundIsOn;
+        handleBackgroundSound();
     }
 
     public static void movePlayerToStart() {
@@ -201,5 +221,12 @@ public class GamePage extends ConfigPage {
         bm.recycle();
         return resizedBitmap;
     }
-
+    public void handleBackgroundSound() {
+        Intent intent = new Intent(GamePage.this, BackgroundSoundService.class);
+        if(soundIsOn){
+            startService(intent);
+        } else {
+            stopService(intent);
+        }
+    }
 }

@@ -27,6 +27,8 @@ public class Player {
 
     private Bitmap bitmap7;
     private Bitmap bitmap8;
+    private Bitmap soundOn;
+    private Bitmap soundOff;
     private int lives;
     private static String name;
 
@@ -56,6 +58,8 @@ public class Player {
         this.bitmap6 = bitmaps[4];
         this.bitmap7 = bitmaps[5];
         this.bitmap8 = bitmaps[6];
+        this.soundOn = bitmaps[7];
+        this.soundOff = bitmaps[8];
         this.lives = lives;
         this.name = name;
         posX = 500;
@@ -173,6 +177,11 @@ public class Player {
         canvas.drawBitmap(bitmap6, canvas.getWidth() - 500, canvas.getHeight() - 210, paint);
         canvas.drawBitmap(bitmap7, canvas.getWidth() - 700, canvas.getHeight() - 210, paint);
         canvas.drawBitmap(bitmap8, canvas.getWidth() / 2 - 60, 20, paint);
+        if(GamePage.soundIsOn) {
+            canvas.drawBitmap(soundOn, canvas.getWidth() - 150, canvas.getHeight() -210, paint);
+        } else {
+            canvas.drawBitmap(soundOff, canvas.getWidth() - 150, canvas.getHeight() -210, paint);
+        }
         canvasWidth = canvas.getWidth();
         canvasHeight = canvas.getHeight();
         drawLives(canvas, paint);
