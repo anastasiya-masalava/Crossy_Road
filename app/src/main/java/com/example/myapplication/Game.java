@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.util.Range;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.app.Service;
 
 import androidx.annotation.NonNull;
 
@@ -334,6 +335,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         Intent i = new Intent(this.context, ExitPage.class);
         this.context.startActivity(i);
         GamePage.setIsExit(true);
+        Intent playSound = new Intent(this.context, BackgroundSoundService.class);
+        this.context.stopService(playSound);
     }
 
 }
