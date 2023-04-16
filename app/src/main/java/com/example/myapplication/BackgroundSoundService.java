@@ -28,11 +28,6 @@ public class BackgroundSoundService extends Service {
     public void onStart(Intent intent, int startId) {
     }
 
-    public void stopPlayingSound(){
-        mediaPlayer.stop();
-        mediaPlayer.release();
-    }
-
     @Override
     public void onDestroy() {
         mediaPlayer.stop();
