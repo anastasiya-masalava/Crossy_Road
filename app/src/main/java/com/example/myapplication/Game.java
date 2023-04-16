@@ -55,6 +55,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private static int endSafeTile;
     private static int endRoadTile;
     private static int endStartTile;
+    private GamePage gamePage;
 
     public static int getEndRiverTile() {
         return endRiverTile;
@@ -85,7 +86,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     //    private final Map map;
     public Game(Context context, String playerName, Bitmap inBitmap, int lives,
-                Bitmap[] bitmaps, int[] units, int[] margins) {
+                Bitmap[] bitmaps, int[] units, int[] margins, GamePage gamePage) {
         super(context);
 
         //Gets the surface holder and adds callback to game
@@ -105,6 +106,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.context = context;
         this.screenWidth = context.getApplicationContext()
                 .getResources().getDisplayMetrics().widthPixels;
+        this.gamePage = gamePage;
 
         // Add initial moving objects
         addMoveable(new Car(context, getRowNCoordinateY(8)));
@@ -203,6 +205,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 System.out.println("did collide with water");
                 didCollide = true;
             }
+
+            if (reachedGoalTile(player)){
+                gamePage.changeToWinPage();
+            }
         }
     }
 
@@ -210,6 +216,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         if (player.getPosY() != 500 && player.getPosX() != 500) {
             return (player.getPosY() > getRowNCoordinateY(2)
                     && player.getPosY() < getRowNCoordinateY(5) - 40);
+        } else {
+            return false;
+        }
+    }
+
+    public boolean reachedGoalTile(Player player) {
+        if (player.getPosY() != 500 && player.getPosX() != 500) {
+            return (player.getPosY() < getRowNCoordinateY(2) - 40);
         } else {
             return false;
         }

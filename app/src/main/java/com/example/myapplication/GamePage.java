@@ -137,7 +137,7 @@ public class GamePage extends ConfigPage {
 
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
-        Game newGame = new Game(this, playerName, bitmap, lives, bitmaps, units, margins);
+        Game newGame = new Game(this, playerName, bitmap, lives, bitmaps, units, margins, this);
         setContentView(newGame);
     }
 

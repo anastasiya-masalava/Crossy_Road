@@ -206,7 +206,7 @@ public class Player {
                 } else if (posY + bitmap.getHeight() >= Game.getEndRiverTile()) {
                     score += 2; // river tiles
                 } else {
-                    score++; // goal tiles
+                    score += 12; // goal tiles
                 }
                 positions.add(posY);
             }
