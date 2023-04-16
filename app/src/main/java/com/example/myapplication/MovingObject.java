@@ -42,6 +42,7 @@ public class MovingObject implements Moveable {
         return this.posY;
     }
 
+    @Override
     public int getSpeed() {
         return this.speed;
     }

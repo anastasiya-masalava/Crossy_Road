@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.util.Log;
 import android.util.Range;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -80,6 +81,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private boolean didCollide;
+    private boolean logDidCollide;
+    private int logCollisionSpeed;
+    private boolean waterDidCollide;
+
 
 
     //    private final Map map;
@@ -113,6 +118,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.setFocusable(true);
 
         this.didCollide = false;
+        this.logDidCollide = false;
+        this.waterDidCollide = false;
     }
 
     public void sync() {
@@ -146,9 +153,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawRGB(41, 41, 41);
 
         drawMap(canvas);
+        drawMoveables(canvas);
         player.draw(canvas, (int) (marginleft + (unit + onepixel) * 5 - unit * 0.15),
                 (int) (marginup + (unitHeight + onepixel) * 14 + (-1.3 * unit + unitHeight)), unit);
-        drawMoveables(canvas);
+
     }
 
     public ArrayList<Moveable> getMoveables() {
@@ -164,28 +172,46 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private void updateMoveables() {
         // We will add a new moving object every x updates.
-        // A new Car will be added every 200 updates
-        if (updatesCount % 200 == 0) {
+        // A new Car will be added every 280 updates
+        if (updatesCount % 280 == 0) {
             Car newCar = new Car(this.context, getRowNCoordinateY(8));
             addMoveable(newCar);
         }
-        // A new Truck will be added every 300 updates
-        if (updatesCount % 300 == 0) {
+        // A new Truck will be added every 400 updates
+        if (updatesCount % 400 == 0) {
             Truck newTruck = new Truck(this.context, getRowNCoordinateY(12));
             addMoveable(newTruck);
         }
-        // A new rocket will be added every 150 updates
-        if (updatesCount % 150 == 0) {
+        // A new rocket will be added every 230 updates
+        if (updatesCount % 230 == 0) {
             Rocket newRocket = new Rocket(this.context, getRowNCoordinateY(10));
             addMoveable(newRocket);
         }
+        // 2 new small logs will be added every 100 updates
+        if (updatesCount % 150 == 0) {
+            LogSmall newLogSmall = new LogSmall(this.context, getRowNCoordinateY(5) - 25);
+            LogSmall newLogSmall2 = new LogSmall(this.context, getRowNCoordinateY(3) - 25);
+            addMoveable(newLogSmall);
+            addMoveable(newLogSmall2);
+        }
 
+        // 2 new big logs will be added every 130 updates
+        if (updatesCount % 160 == 0) {
+            LogLong newLogLong = new LogLong(this.context, getRowNCoordinateY(4) - 25);
+            LogLong newLogLong2 = new LogLong(this.context, getRowNCoordinateY(2) - 25);
+            addMoveable(newLogLong);
+            addMoveable(newLogLong2);
+        }
+        didCollide = false;
+        logDidCollide = false;
+        waterDidCollide = false;
+        logCollisionSpeed = 0;
         for (int i = 0; i < this.movingObjects.size(); i++) {
             Moveable currentMovingObject = this.movingObjects.get(i);
             currentMovingObject.update();
             int currentPosX = currentMovingObject.getPosX();
             // Check if object is going off the screen. If so, remove the object from the game
-            if (currentPosX > screenWidth || currentPosX < 0) {
+            if (currentPosX > (screenWidth + 10) || currentPosX < (-10 - currentMovingObject.getWidth())) {
                 removeMoveable(currentMovingObject);
             }
 
@@ -193,14 +219,30 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             if (collisionDidOccur(player, currentMovingObject)) {
                 System.out.println("did collide with " + i);
                 didCollide = true;
+                break;
             }
 
-            // check for water collision
-            if (waterCollisionDidOccur(player)) {
-                System.out.println("did collide with water");
-                didCollide = true;
+
+            // check if on a log
+            if (logCollisionDidOccur(player, currentMovingObject)){
+                logDidCollide = true;
+                logCollisionSpeed = currentMovingObject.getSpeed();
+                break;
             }
         }
+        // check for water collision
+        if (waterCollisionDidOccur(player)) {
+            System.out.println("did collide with water");
+            didCollide = true;
+            waterDidCollide = true;
+        }
+
+
+        player.updateLogCollision(logCollisionSpeed, logDidCollide);
+        if (logDidCollide && waterDidCollide) {
+            System.out.println("Collided with water but is on a log");
+        }
+
     }
 
     public boolean waterCollisionDidOccur(Player player) {
@@ -213,10 +255,28 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public boolean collisionDidOccur(Player player, Moveable vehicle) {
+        // Skipping if the moving object is a log
+        if (vehicle instanceof LogLong || vehicle instanceof LogSmall) {
+            return false;
+        }
         if (isInRange(player.getPosX(), vehicle.getPosX(), player.getPlayerWidth(),
                 vehicle.getWidth(), 15, 15)
                 && isInRange(player.getPosY(), vehicle.getPosY(), player.getPlayerHeight(),
                 vehicle.getHeight(), 50, 50)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean logCollisionDidOccur(Player player, Moveable movingObject) {
+        // Only check log objects
+        if (!(movingObject instanceof LogLong) && !(movingObject instanceof LogSmall)) {
+            return false;
+        }
+        if (isInRange(player.getPosX(), movingObject.getPosX(), player.getPlayerWidth(),
+                movingObject.getWidth(), 15, 15)
+                && isInRange(player.getPosY(), movingObject.getPosY(), player.getPlayerHeight(),
+                movingObject.getHeight(), 50, 50)) {
             return true;
         }
         return false;
@@ -321,7 +381,20 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.didCollide = didCollide;
     }
 
+    public boolean getLogDidCollide() {
+        return logDidCollide;
+    }
+
+    public void setLogDidCollide(boolean logDidCollide) {
+        this.logDidCollide = logDidCollide;
+    }
+
+    public int getLogCollisionSpeed() {
+        return logCollisionSpeed;
+    }
+
     public void manageCollision() {
+        player.resetCumulativeLogCollisionSpeed();
         if (player.getLives() > 1) {
             this.player.loseLife();
             Player.setScore(0);
