@@ -14,6 +14,7 @@
         <activity android:name=".ConfigPage"></activity>
         <activity android:name=".GamePage"></activity>
         <activity android:name=".ExitPage"></activity>
+        <activity android:name=".WinPage"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
