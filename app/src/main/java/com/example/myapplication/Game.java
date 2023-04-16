@@ -147,6 +147,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawRGB(41, 41, 41);
 
         drawMap(canvas);
+
         player.draw(canvas, (int) (marginleft + (unit + onepixel) * 5 - unit * 0.15),
                 (int) (marginup + (unitHeight + onepixel) * 14 + (-1.3 * unit + unitHeight)), unit);
         drawMoveables(canvas);
@@ -166,6 +167,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private void updateMoveables() {
         // We will add a new moving object every x updates.
         // A new Car will be added every 200 updates
+
         if (updatesCount % 200 == 0) {
             Car newCar = new Car(this.context, getRowNCoordinateY(8));
             addMoveable(newCar);
