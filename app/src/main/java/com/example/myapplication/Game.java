@@ -223,7 +223,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public boolean reachedGoalTile(Player player) {
         if (player.getPosY() != 500 && player.getPosX() != 500) {
-            return (player.getPosY() < getRowNCoordinateY(2) - 40);
+            return (player.getPosY() < getRowNCoordinateY(2) - 100);
         } else {
             return false;
         }
