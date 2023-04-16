@@ -137,7 +137,7 @@ public class GamePage extends ConfigPage {
 
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
-        Game newGame = new Game(this, playerName, bitmap, lives, bitmaps, units, margins);
+        Game newGame = new Game(this, playerName, bitmap, lives, bitmaps, units, margins, this);
         setContentView(newGame);
     }
 
@@ -193,9 +193,9 @@ public class GamePage extends ConfigPage {
             switchMusicState();
         }
         int new_score = Player.updateScore(Player.posX, Player.posY);
-        if (new_score>=15){
-            changeToWinPage();
-        }
+//        if (new_score>=15){
+//            changeToWinPage();
+//        }
         return true;
     }
 
