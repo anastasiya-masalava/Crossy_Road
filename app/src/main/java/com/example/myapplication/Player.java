@@ -47,7 +47,7 @@ public class Player {
         this.didCollide = didCollide;
     }
 
-    private static Set<Object> positions = new HashSet<>(); // hashset with posY values
+    public static Set<Object> positions = new HashSet<>(); // hashset with posY values
 
     public Player(Context context, Bitmap bitmap, int lives, String name, Bitmap[] bitmaps) {
         this.context = context;
