@@ -13,4 +13,6 @@ public interface Moveable {
     int getHeight();
 
     int getWidth();
+
+    int getSpeed();
 }
