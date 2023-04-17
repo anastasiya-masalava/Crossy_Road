@@ -62,7 +62,6 @@ public class Sprint5Tests {
         Player.positions.clear();
         game = new Game(appContext, "1234", bitmap, 10,
                 bitmaps, units, margins, null);
-        game.sync();
     }
 
     @Test
