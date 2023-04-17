@@ -37,7 +37,7 @@ public class PlayerTest {
                 R.drawable.left_arrow);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
-        player = new Player(appContext, bitmap, 5, "test player", bitmaps);
+        player = new Player(appContext, 5, "test player", bitmaps);
 
         String name = player.getName();
 
@@ -62,7 +62,7 @@ public class PlayerTest {
                 R.drawable.left_arrow);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
-        player = new Player(appContext, bitmap, 5, "test player", bitmaps);
+        player = new Player(appContext, 5, "test player", bitmaps);
 
         String name = player.getName();
 
@@ -91,7 +91,7 @@ public class PlayerTest {
                 R.drawable.left_arrow);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
-        player = new Player(appContext, bitmap, 5, "test player", bitmaps);
+        player = new Player(appContext, 5, "test player", bitmaps);
 
         int lives = player.getLives();
 
@@ -116,7 +116,7 @@ public class PlayerTest {
                 R.drawable.left_arrow);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
-        player = new Player(appContext, bitmap, 5, "test player", bitmaps);
+        player = new Player(appContext, 5, "test player", bitmaps);
 
         int lives = player.getLives();
 
@@ -145,7 +145,7 @@ public class PlayerTest {
                 R.drawable.left_arrow);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
-        player = new Player(appContext, bitmap, 3, "test player", bitmaps);
+        player = new Player(appContext, 3, "test player", bitmaps);
 
         int lives = player.getLives();
 
@@ -173,7 +173,7 @@ public class PlayerTest {
                 R.drawable.left_arrow);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
-        player = new Player(appContext, bitmap, 2, "test player", bitmaps);
+        player = new Player(appContext, 2, "test player", bitmaps);
 
         int lives = player.getLives();
 
@@ -203,7 +203,7 @@ public class PlayerTest {
                 R.drawable.left_arrow);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
-        player = new Player(appContext, bitmap, 5, "test player", bitmaps);
+        player = new Player(appContext, 5, "test player", bitmaps);
 
         Assert.assertEquals(player.getPosX(), 500);     // Default is 500
     }
@@ -226,7 +226,7 @@ public class PlayerTest {
                 R.drawable.left_arrow);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
-        player = new Player(appContext, bitmap, 5, "test player", bitmaps);
+        player = new Player(appContext, 5, "test player", bitmaps);
 
         Assert.assertEquals(player.getPosY(), 500);     // Default is 500
     }
@@ -249,7 +249,7 @@ public class PlayerTest {
                 R.drawable.left_arrow);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
-        player = new Player(appContext, bitmap, 5, "test player", bitmaps);
+        player = new Player(appContext, 5, "test player", bitmaps);
 
         Assert.assertEquals(player.getPosX(), 500);     // Default is 500
 
@@ -276,7 +276,7 @@ public class PlayerTest {
                 R.drawable.left_arrow);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
-        player = new Player(appContext, bitmap, 5, "test player", bitmaps);
+        player = new Player(appContext, 5, "test player", bitmaps);
 
         Assert.assertEquals(player.getPosY(), 500);     // Default is 500
 
@@ -303,7 +303,7 @@ public class PlayerTest {
                 R.drawable.left_arrow);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
-        player = new Player(appContext, bitmap, 5, "test player", bitmaps);
+        player = new Player(appContext, 5, "test player", bitmaps);
 
         Assert.assertEquals(player.getPosX(), 500);     // Default is 500
         Assert.assertEquals(player.getPosY(), 500);     // Default is 500
@@ -327,7 +327,7 @@ public class PlayerTest {
                 R.drawable.left_arrow);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
-        player = new Player(appContext, bitmap, 5, "test player", bitmaps);
+        player = new Player(appContext, 5, "test player", bitmaps);
 
         Assert.assertEquals(player.getPosX(), 500);     // Default is 500
         Assert.assertEquals(player.getPosY(), 500);     // Default is 500

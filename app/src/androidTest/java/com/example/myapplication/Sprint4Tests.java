@@ -52,7 +52,7 @@ public class Sprint4Tests {
             bitmap5, bitmap6, bitmap7, bitmap8};
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
-        game = new Game(appContext, "1234", bitmap, 10,
+        game = new Game(appContext, "1234", 10,
             bitmaps, units, margins, null);
         game.sync();
     }

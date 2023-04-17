@@ -135,12 +135,12 @@ public class GamePage extends ConfigPage {
         soundOn = getResizedBitmap(soundOn, 100, 100);
         soundOff = getResizedBitmap(soundOff, 100, 100);
 
-        Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7,
-            bitmap8, soundOn, soundOff};
+        Bitmap[] bitmaps = new Bitmap[]{bitmap, bitmap2, bitmap3, bitmap4, bitmap5,
+            bitmap6, bitmap7, bitmap8, soundOn, soundOff};
 
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
-        Game newGame = new Game(this, playerName, bitmap, lives, bitmaps, units, margins, this);
+        Game newGame = new Game(this, playerName, lives, bitmaps, units, margins, this);
         setContentView(newGame);
     }
 

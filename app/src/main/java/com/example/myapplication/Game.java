@@ -88,7 +88,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
 
     //    private final Map map;
-    public Game(Context context, String playerName, Bitmap inBitmap, int lives,
+    public Game(Context context, String playerName, int lives,
                 Bitmap[] bitmaps, int[] units, int[] margins, GamePage gamePage) {
         super(context);
 
@@ -103,7 +103,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.unitHeight = units[2];
         this.marginleft = margins[0];
         this.marginup = margins[1];
-        this.player = new Player(getContext(), inBitmap, lives, playerName, bitmaps);
+        this.player = new Player(getContext(), lives, playerName, bitmaps);
         this.movingObjects = new ArrayList<>();
         this.updatesCount = 0;
         this.context = context;

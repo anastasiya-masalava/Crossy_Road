@@ -55,18 +55,18 @@ public class Player {
     private int cumulativeLogCollisionSpeed;
     private boolean logCollision;   // if a log collision if happening right now
 
-    public Player(Context context, Bitmap bitmap, int lives, String name, Bitmap[] bitmaps) {
+    public Player(Context context, int lives, String name, Bitmap[] bitmaps) {
         this.context = context;
-        this.bitmap = bitmap;
-        this.bitmap2 = bitmaps[0];
-        this.bitmap3 = bitmaps[1];
-        this.bitmap4 = bitmaps[2];
-        this.bitmap5 = bitmaps[3];
-        this.bitmap6 = bitmaps[4];
-        this.bitmap7 = bitmaps[5];
-        this.bitmap8 = bitmaps[6];
-        this.soundOn = bitmaps[7];
-        this.soundOff = bitmaps[8];
+        this.bitmap = bitmaps[0];
+        this.bitmap2 = bitmaps[1];
+        this.bitmap3 = bitmaps[2];
+        this.bitmap4 = bitmaps[3];
+        this.bitmap5 = bitmaps[4];
+        this.bitmap6 = bitmaps[5];
+        this.bitmap7 = bitmaps[6];
+        this.bitmap8 = bitmaps[7];
+        this.soundOn = bitmaps[8];
+        this.soundOff = bitmaps[9];
         this.lives = lives;
         this.name = name;
         posX = 500;

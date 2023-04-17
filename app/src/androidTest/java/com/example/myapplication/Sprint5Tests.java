@@ -55,13 +55,13 @@ public class Sprint5Tests {
         Bitmap soundOff = BitmapFactory.decodeResource(appContext.getResources(),
                 R.drawable.sound_off);
 
-        Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4,
+        Bitmap[] bitmaps = new Bitmap[]{bitmap, bitmap2, bitmap3, bitmap4,
             bitmap5, bitmap6, bitmap7, bitmap8, soundOn, soundOff};
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
         Player.setScore(0);
         Player.getPositions().clear();
-        game = new Game(appContext, "1234", bitmap, 10,
+        game = new Game(appContext, "1234", 10,
                 bitmaps, units, margins, null);
     }
 
