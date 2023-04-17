@@ -8,7 +8,7 @@ import android.media.MediaPlayer;
 import androidx.annotation.Nullable;
 
 public class BackgroundSoundService extends Service {
-    MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer;
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {

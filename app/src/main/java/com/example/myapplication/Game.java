@@ -7,11 +7,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.util.Log;
 import android.util.Range;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.app.Service;
 
 import androidx.annotation.NonNull;
 
@@ -90,7 +88,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
 
     //    private final Map map;
-    public Game(Context context, String playerName, Bitmap inBitmap, int lives,
+    public Game(Context context, String playerName, int lives,
                 Bitmap[] bitmaps, int[] units, int[] margins, GamePage gamePage) {
         super(context);
 
@@ -105,7 +103,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.unitHeight = units[2];
         this.marginleft = margins[0];
         this.marginup = margins[1];
-        this.player = new Player(getContext(), inBitmap, lives, playerName, bitmaps);
+        this.player = new Player(getContext(), lives, playerName, bitmaps);
         this.movingObjects = new ArrayList<>();
         this.updatesCount = 0;
         this.context = context;
@@ -218,7 +216,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             currentMovingObject.update();
             int currentPosX = currentMovingObject.getPosX();
             // Check if object is going off the screen. If so, remove the object from the game
-            if (currentPosX > (screenWidth + 10) || currentPosX < (-10 - currentMovingObject.getWidth())) {
+            if (currentPosX > (screenWidth + 10)
+                    || currentPosX < (-10 - currentMovingObject.getWidth())) {
                 removeMoveable(currentMovingObject);
             }
 
@@ -231,13 +230,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
 
             // check if on a log
-            if (logCollisionDidOccur(player, currentMovingObject)){
+            if (logCollisionDidOccur(player, currentMovingObject)) {
                 logDidCollide = true;
                 logCollisionSpeed = currentMovingObject.getSpeed();
                 break;
             }
 
-            if (reachedGoalTile(player)){
+            if (reachedGoalTile(player)) {
                 gamePage.changeToWinPage();
             }
         }
