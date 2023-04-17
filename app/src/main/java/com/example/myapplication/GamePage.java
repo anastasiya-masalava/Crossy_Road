@@ -9,7 +9,6 @@ import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
-import android.view.View;
 
 public class GamePage extends ConfigPage {
     public static int getChangeX() {
@@ -54,7 +53,11 @@ public class GamePage extends ConfigPage {
     private static int countVert = 0;
     private static int countHoriz = 0;
 
-    public static boolean soundIsOn = false;
+    private static boolean soundIsOn = false;
+
+    public static boolean getSoundIsOn() {
+        return GamePage.soundIsOn;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,23 +186,24 @@ public class GamePage extends ConfigPage {
                 && y >= 250 && y <= 350) {
             isExit = true;
             System.out.println("Exit pressed");
-            if(soundIsOn) { switchMusicState(); }
+            if (soundIsOn) {
+                switchMusicState();
+            }
             moveToGameOverPage();
         }
 
-        if(x >= soundBtn - buttonSize && x <= soundBtn + buttonSize
-                && y >= btny - buttonSize && y <= btny + buttonSize){
+        if (x >= soundBtn - buttonSize && x <= soundBtn + buttonSize
+                && y >= btny - buttonSize && y <= btny + buttonSize) {
             System.out.println("sound is pressed");
             switchMusicState();
         }
-        int new_score = Player.updateScore(Player.posX, Player.posY);
-//        if (new_score>=15){
-//            changeToWinPage();
-//        }
+        //  if (new_score>=15){
+        //            changeToWinPage();
+        //  }
         return true;
     }
 
-    private void switchMusicState(){
+    private void switchMusicState() {
         soundIsOn = !soundIsOn;
         handleBackgroundSound();
     }
@@ -208,7 +212,7 @@ public class GamePage extends ConfigPage {
         changeX = 0;
         changeY = 0;
     }
-    public void changeToWinPage(){
+    public void changeToWinPage() {
         isExit = true;
         System.out.println("Success");
         Intent i = new Intent(getApplicationContext(), WinPage.class);
@@ -235,7 +239,7 @@ public class GamePage extends ConfigPage {
     }
     public void handleBackgroundSound() {
         Intent intent = new Intent(GamePage.this, BackgroundSoundService.class);
-        if(soundIsOn){
+        if (soundIsOn) {
             startService(intent);
         } else {
             stopService(intent);

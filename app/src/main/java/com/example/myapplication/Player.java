@@ -38,8 +38,8 @@ public class Player {
     }
 
     private static int score;
-    public static int posX;
-    public static int posY;
+    private static int posX;
+    private static int posY;
 
     private boolean didCollide = false;
 
@@ -47,8 +47,11 @@ public class Player {
         this.didCollide = didCollide;
     }
 
-    public static Set<Object> positions = new HashSet<>(); // hashset with posY values
+    private static Set<Object> positions = new HashSet<>(); // hashset with posY values
 
+    public static Set<Object> getPositions() {
+        return Player.positions;
+    }
     private int cumulativeLogCollisionSpeed;
     private boolean logCollision;   // if a log collision if happening right now
 
@@ -170,7 +173,7 @@ public class Player {
 
         if (newX >= 0 && newX < 950 && newY > 200 && newY < 1270) {
             canvas.drawBitmap(bitmap, newX, newY, paint);
-//            resetCumulativeLogCollisionSpeed();
+            // resetCumulativeLogCollisionSpeed();
             this.posX = newX;
             this.posY = newY;
         } else {
@@ -216,10 +219,10 @@ public class Player {
         canvas.drawBitmap(bitmap6, canvas.getWidth() - 500, canvas.getHeight() - 210, paint);
         canvas.drawBitmap(bitmap7, canvas.getWidth() - 700, canvas.getHeight() - 210, paint);
         canvas.drawBitmap(bitmap8, canvas.getWidth() / 2 - 60, 20, paint);
-        if(GamePage.soundIsOn) {
-            canvas.drawBitmap(soundOn, canvas.getWidth() - 150, canvas.getHeight() -210, paint);
+        if (GamePage.getSoundIsOn()) {
+            canvas.drawBitmap(soundOn, canvas.getWidth() - 150, canvas.getHeight() - 210, paint);
         } else {
-            canvas.drawBitmap(soundOff, canvas.getWidth() - 150, canvas.getHeight() -210, paint);
+            canvas.drawBitmap(soundOff, canvas.getWidth() - 150, canvas.getHeight() - 210, paint);
         }
         canvasWidth = canvas.getWidth();
         canvasHeight = canvas.getHeight();

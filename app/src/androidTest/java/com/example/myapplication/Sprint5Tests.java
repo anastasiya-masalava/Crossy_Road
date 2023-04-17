@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -51,15 +50,17 @@ public class Sprint5Tests {
                 R.drawable.left_arrow);
         Bitmap bitmap8 = BitmapFactory.decodeResource(appContext.getResources(),
                 R.drawable.exit_2);
-        Bitmap soundOn = BitmapFactory.decodeResource(appContext.getResources(), R.drawable.sound_on);
-        Bitmap soundOff = BitmapFactory.decodeResource(appContext.getResources(), R.drawable.sound_off);
+        Bitmap soundOn = BitmapFactory.decodeResource(appContext.getResources(),
+                R.drawable.sound_on);
+        Bitmap soundOff = BitmapFactory.decodeResource(appContext.getResources(),
+                R.drawable.sound_off);
 
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4,
-                bitmap5, bitmap6, bitmap7, bitmap8, soundOn, soundOff};
+            bitmap5, bitmap6, bitmap7, bitmap8, soundOn, soundOff};
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
         Player.setScore(0);
-        Player.positions.clear();
+        Player.getPositions().clear();
         game = new Game(appContext, "1234", bitmap, 10,
                 bitmaps, units, margins, null);
     }
@@ -226,20 +227,19 @@ public class Sprint5Tests {
     public void testGoalGameOverMoveablesReset() {
         createNewGame();
         Player player = game.getPlayer();
-        ArrayList<Moveable> prev_movables = game.getMoveables();
+        ArrayList<Moveable> prevMovables = game.getMoveables();
         int posX = player.getPosX();
         int posY = player.getPosY();
         player.setPosY(posY - 1200);
         game.update();
         createNewGame();
-        Assert.assertNotEquals(prev_movables, game.getMoveables());
+        Assert.assertNotEquals(prevMovables, game.getMoveables());
     }
 
     @Test
     public void testGoalGameOverScoreTilesReset() {
         createNewGame();
         Player player = game.getPlayer();
-        ArrayList<Moveable> prev_movables = game.getMoveables();
         int posX = player.getPosX();
         int posY = player.getPosY();
         player.setPosY(posY - 300);
