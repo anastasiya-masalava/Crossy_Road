@@ -53,7 +53,7 @@ public class Sprint3Tests {
         Bitmap[] bitmaps = new Bitmap[]{bitmap2, bitmap3, bitmap4, bitmap5, bitmap6, bitmap7};
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
-        game = new Game(appContext, "1234", bitmap, 10, bitmaps, units, margins);
+        game = new Game(appContext, "1234", bitmap, 10, bitmaps, units, margins, null);
     }
     
     private void createNewPlayer() {

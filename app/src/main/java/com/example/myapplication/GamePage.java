@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -135,7 +137,7 @@ public class GamePage extends ConfigPage {
 
         int[] units = new int[]{unit, onepixel, unitHeight};
         int[] margins = new int[]{marginleft, marginup};
-        Game newGame = new Game(this, playerName, bitmap, lives, bitmaps, units, margins);
+        Game newGame = new Game(this, playerName, bitmap, lives, bitmaps, units, margins, this);
         setContentView(newGame);
     }
 
@@ -190,6 +192,10 @@ public class GamePage extends ConfigPage {
             System.out.println("sound is pressed");
             switchMusicState();
         }
+        int new_score = Player.updateScore(Player.posX, Player.posY);
+//        if (new_score>=15){
+//            changeToWinPage();
+//        }
         return true;
     }
 
@@ -202,7 +208,13 @@ public class GamePage extends ConfigPage {
         changeX = 0;
         changeY = 0;
     }
+    public void changeToWinPage(){
+        isExit = true;
+        System.out.println("Success");
+        Intent i = new Intent(getApplicationContext(), WinPage.class);
+        startActivity(i);
 
+    }
     public void moveToGameOverPage() {
         Intent i = new Intent(getApplicationContext(), ExitPage.class);
         startActivity(i);

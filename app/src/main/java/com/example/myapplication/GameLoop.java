@@ -123,6 +123,7 @@ public class GameLoop extends Thread {
                 game.setDidCollide(false);
             }
 
+
             if (!canProcessCollide) {
                 collideTime += 1;
                 if (collideTime > 10) {

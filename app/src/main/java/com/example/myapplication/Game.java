@@ -11,6 +11,7 @@ import android.util.Log;
 import android.util.Range;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.app.Service;
 
 import androidx.annotation.NonNull;
 
@@ -55,6 +56,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private static int endSafeTile;
     private static int endRoadTile;
     private static int endStartTile;
+    private GamePage gamePage;
 
     public static int getEndRiverTile() {
         return endRiverTile;
@@ -89,7 +91,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     //    private final Map map;
     public Game(Context context, String playerName, Bitmap inBitmap, int lives,
-                Bitmap[] bitmaps, int[] units, int[] margins) {
+                Bitmap[] bitmaps, int[] units, int[] margins, GamePage gamePage) {
         super(context);
 
         //Gets the surface holder and adds callback to game
@@ -109,6 +111,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.context = context;
         this.screenWidth = context.getApplicationContext()
                 .getResources().getDisplayMetrics().widthPixels;
+        this.gamePage = gamePage;
 
         // Add initial moving objects
         addMoveable(new Car(context, getRowNCoordinateY(8)));
@@ -153,7 +156,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawRGB(41, 41, 41);
 
         drawMap(canvas);
+
         drawMoveables(canvas);
+
         player.draw(canvas, (int) (marginleft + (unit + onepixel) * 5 - unit * 0.15),
                 (int) (marginup + (unitHeight + onepixel) * 14 + (-1.3 * unit + unitHeight)), unit);
 
@@ -172,8 +177,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private void updateMoveables() {
         // We will add a new moving object every x updates.
+
         // A new Car will be added every 280 updates
         if (updatesCount % 280 == 0) {
+
             Car newCar = new Car(this.context, getRowNCoordinateY(8));
             addMoveable(newCar);
         }
@@ -229,6 +236,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 logCollisionSpeed = currentMovingObject.getSpeed();
                 break;
             }
+
+            if (reachedGoalTile(player)){
+                gamePage.changeToWinPage();
+            }
         }
         // check for water collision
         if (waterCollisionDidOccur(player)) {
@@ -249,6 +260,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         if (player.getPosY() != 500 && player.getPosX() != 500) {
             return (player.getPosY() > getRowNCoordinateY(2)
                     && player.getPosY() < getRowNCoordinateY(5) - 40);
+        } else {
+            return false;
+        }
+    }
+
+    public boolean reachedGoalTile(Player player) {
+        if (player.getPosY() != 500 && player.getPosX() != 500) {
+            return (player.getPosY() < getRowNCoordinateY(2) - 100);
         } else {
             return false;
         }
@@ -407,6 +426,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         Intent i = new Intent(this.context, ExitPage.class);
         this.context.startActivity(i);
         GamePage.setIsExit(true);
+        Intent playSound = new Intent(this.context, BackgroundSoundService.class);
+        this.context.stopService(playSound);
     }
 
 }
