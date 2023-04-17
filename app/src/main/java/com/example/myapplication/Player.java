@@ -49,6 +49,9 @@ public class Player {
 
     private static Set<Object> positions = new HashSet<>(); // hashset with posY values
 
+    private int cumulativeLogCollisionSpeed;
+    private boolean logCollision;   // if a log collision if happening right now
+
     public Player(Context context, Bitmap bitmap, int lives, String name, Bitmap[] bitmaps) {
         this.context = context;
         this.bitmap = bitmap;
@@ -65,6 +68,8 @@ public class Player {
         this.name = name;
         posX = 500;
         posY = 500;
+        this.cumulativeLogCollisionSpeed = 0;
+        this.logCollision = false;
     }
 
     public static int getCanvasWidth() {
@@ -115,6 +120,11 @@ public class Player {
         this.posY = posY;
     }
 
+
+    public void resetCumulativeLogCollisionSpeed() {
+        this.cumulativeLogCollisionSpeed = 0;
+    }
+
     public Bitmap getBitmap() {
         return bitmap;
     }
@@ -129,6 +139,11 @@ public class Player {
 
     public int getPlayerHeight() {
         return bitmap.getHeight();
+    }
+
+    public void updateLogCollision(int collisionSpeed, boolean logCollision) {
+        this.cumulativeLogCollisionSpeed = this.cumulativeLogCollisionSpeed + collisionSpeed;
+        this.logCollision = logCollision;
     }
 
     public void draw(Canvas canvas, int marginleft, int marginup, int unit) {
@@ -148,22 +163,45 @@ public class Player {
         int newX = marginleft + changeX * 49;
         int newY = marginup + changeY * 49;
 
+        // Add cumulative position changes from logs
+        newX = newX + cumulativeLogCollisionSpeed;
+
+        // Reset player if carried out of screen by log
+
         if (newX >= 0 && newX < 950 && newY > 200 && newY < 1270) {
             canvas.drawBitmap(bitmap, newX, newY, paint);
+//            resetCumulativeLogCollisionSpeed();
             this.posX = newX;
             this.posY = newY;
         } else {
-            if (newX < 0) {
-                GamePage.setChangeX(changeX + 1);
-            }
-            if (newX >= 950) {
-                GamePage.setChangeX(changeX - 1);
-            }
-            if (newY <= 200) {
-                GamePage.getChangeY(changeY + 1);
-            }
-            if (newY >= 1270) {
-                GamePage.getChangeY(changeY - 1);
+            // Let the player get carried out by log
+            if (logCollision) {
+                // check if player outside of game area
+                if (newX < 0 || newX >= 950) {
+                    resetCumulativeLogCollisionSpeed();
+                    if (getLives() > 1) {
+                        loseLife();
+                        setScore(0);
+                    } else {
+                        Intent i = new Intent(this.context, ExitPage.class);
+                        this.context.startActivity(i);
+                        GamePage.setIsExit(true);
+                    }
+                    GamePage.movePlayerToStart();
+                }
+            } else {
+                if (newX < 0) {
+                    GamePage.setChangeX(changeX + 1);
+                }
+                if (newX >= 950) {
+                    GamePage.setChangeX(changeX - 1);
+                }
+                if (newY <= 200) {
+                    GamePage.getChangeY(changeY + 1);
+                }
+                if (newY >= 1270) {
+                    GamePage.getChangeY(changeY - 1);
+                }
             }
             canvas.drawBitmap(bitmap, this.posX, this.posY, paint);
         }
@@ -230,6 +268,7 @@ public class Player {
         String levelText = Integer.toString(score);
         canvas.drawText(levelText, canvas.getWidth() - 90, 150, paint);
     }
+
 
 
     public void update() {
