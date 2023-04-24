@@ -13,78 +13,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class ConfigPage extends AppCompatActivity {
-    private TextView alertTextView;
     private boolean isLevelSelected = false;
     private boolean isSpriteSelected = false;
     private String difficultyLevel;
     private String spriteSelected;
     private String enteredName;
 
-    public void setAlertTextView(TextView textView) {
-        this.alertTextView = textView;
-    }
-
-    public void setIsLevelSelected(boolean isSelected) {
-        this.isLevelSelected = isSelected;
-    }
-
-    public boolean getIsLevelSelected() {
-        return isLevelSelected;
-    }
-
-    public void setDifficultyLevel(String difficultyLevel) {
-        this.difficultyLevel = difficultyLevel;
-    }
-
-    public String getDifficultyLevel() {
-        return difficultyLevel;
-    }
-
-    public void setIsSpriteSelected(boolean isSelected) {
-        this.isSpriteSelected = isSelected;
-    }
-
-    public boolean getIsSpriteSelected() {
-        return isSpriteSelected;
-    }
-
-    public void setSpriteSelected(String spriteSelected) {
-        this.spriteSelected = spriteSelected;
-    }
-
-    public String getSpriteSelected() {
-        return spriteSelected;
-    }
-
-    public void setEnteredName(String enteredName) {
-        this.enteredName = enteredName;
-    }
-
-    public String getEnteredName() {
-        System.out.println(enteredName);
-        return enteredName;
-    }
-
     public void onLevelSelected(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
-        setIsLevelSelected(checked);
+        this.isLevelSelected = checked;
 
         // Check which radio button was clicked
         switch (view.getId()) {
         case R.id.easyLevel:
             if (checked) {
-                setDifficultyLevel("Easy");
+                this.difficultyLevel = "Easy";
             }
             break;
         case R.id.mediumLevel:
             if (checked) {
-                setDifficultyLevel("Medium");
+                this.difficultyLevel = "Medium";
             }
             break;
         case R.id.hardLevel:
             if (checked) {
-                setDifficultyLevel("Hard");
+                this.difficultyLevel = "Hard";
             }
             break;
         default:
@@ -95,24 +49,24 @@ public class ConfigPage extends AppCompatActivity {
     public void onSpriteSelected(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
-        setIsSpriteSelected(checked);
+        this.isSpriteSelected = checked;
 
         // Check which radio button was clicked
         switch (view.getId()) {
         case R.id.frog:
             if (checked) {
-                setSpriteSelected("Frog");
+                this.spriteSelected = "Frog";
             }
             break;
         case R.id.fox:
             if (checked) {
-                setSpriteSelected("Fox");
+                this.spriteSelected = "Fox";
             }
             break;
 
         case R.id.bunny:
             if (checked) {
-                setSpriteSelected("Bunny");
+                this.spriteSelected = "Bunny";
             }
             break;
         default:
@@ -149,7 +103,7 @@ public class ConfigPage extends AppCompatActivity {
     public void startGame(View v) {
         TextInputEditText textInputElement = findViewById(R.id.entered_name);
         String enteredName = textInputElement.getText().toString();
-        setEnteredName(enteredName);
+        this.enteredName = enteredName;
 
         String alertTitle = "";
         String alertMessage = "";
@@ -158,16 +112,16 @@ public class ConfigPage extends AppCompatActivity {
             alertTitle = "Name not entered!";
             alertMessage = "Please enter a valid name to proceed";
             makeAlertBuilder(alertTitle, alertMessage);
-        } else if (!getIsLevelSelected()) {
+        } else if (!isLevelSelected) {
             alertTitle = "Difficulty level is not selected!";
             alertMessage = "Please select a difficulty level to proceed";
             makeAlertBuilder(alertTitle, alertMessage);
-        } else if (!getIsSpriteSelected()) {
+        } else if (!isSpriteSelected) {
             alertTitle = "Sprite is not selected!";
             alertMessage = "Please select a sprite to proceed";
             makeAlertBuilder(alertTitle, alertMessage);
         } else {
-            System.out.println("ENTERED name: " + getEnteredName());
+            System.out.println("ENTERED name: " + enteredName);
             Bundle extras = new Bundle();
             extras.putString("player_name", enteredName);
             extras.putString("difficulty", difficultyLevel);
